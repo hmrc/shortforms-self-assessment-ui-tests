@@ -25,7 +25,6 @@ import uk.gov.hmrc.selenium.component.PageObject
 import uk.gov.hmrc.selenium.webdriver.Driver
 import uk.gov.hmrc.ui.driver.BrowserDriver
 
-import scala.jdk.CollectionConverters.*
 import java.time.Duration
 
 trait BasePage extends PageObject with Eventually with Matchers with LazyLogging with BrowserDriver {

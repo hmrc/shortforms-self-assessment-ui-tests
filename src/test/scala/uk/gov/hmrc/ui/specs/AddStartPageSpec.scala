@@ -21,7 +21,7 @@ import org.scalatest.verbs.ShouldVerb
 import uk.gov.hmrc.selenium.webdriver.{Browser, ScreenshotOnFailure}
 import uk.gov.hmrc.ui.pages.*
 
-class AddStartPAgeSpec
+class AddStartPageSpec
     extends AnyFeatureSpec
     with BaseSpec
     with GivenWhenThen

@@ -18,10 +18,10 @@ package uk.gov.hmrc.ui.util
 
 object Env {
   val baseUrl: String = Option(System.getProperty("environment")) match {
-    case Some("staging")   => Urls.STAGING
-    case Some("local") => Urls.LOCAL
-    case Some("QA")    => Urls.QA
-    case _             => Urls.LOCAL
+    case Some("staging") => Urls.STAGING
+    case Some("local")   => Urls.LOCAL
+    case Some("QA")      => Urls.QA
+    case _               => Urls.LOCAL
 
   }
 }

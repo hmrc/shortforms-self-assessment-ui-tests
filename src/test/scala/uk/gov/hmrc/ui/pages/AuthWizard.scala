@@ -55,17 +55,17 @@ object AuthWizard extends BasePage {
     Redirect
   }
 
-  def fillInputs(ninoVal:String,confidenceVal:String, affinityGroupVal: String): this.type = {
+  def fillInputs(ninoVal: String, confidenceVal: String, affinityGroupVal: String): this.type = {
     driver.findElement(nino).sendKeys(ninoVal)
     driver.findElement(confidenceLevel).sendKeys(confidenceVal)
     driver.findElement(affinityGroup).sendKeys(affinityGroupVal)
     this
   }
 
-  def login(ninoVal:String,confidenceVal:String,affinityGroupVal: String): Unit = {
+  def login(ninoVal: String, confidenceVal: String, affinityGroupVal: String): Unit = {
     AuthWizard.navigateToPage(url)
     sendKeys(redirectUrl, buildRedirectUrl())
-    fillInputs(ninoVal,confidenceVal,affinityGroupVal)
+    fillInputs(ninoVal, confidenceVal, affinityGroupVal)
     click(btnSubmit)
   }
 }

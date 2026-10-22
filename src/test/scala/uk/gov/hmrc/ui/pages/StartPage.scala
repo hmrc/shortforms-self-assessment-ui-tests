@@ -16,8 +16,6 @@
 
 package uk.gov.hmrc.ui.pages
 
-import org.openqa.selenium.By
-
 object StartPage extends BasePage {
 
   override def pageUrl: String = "self-assessment-forms/sa1/start"
