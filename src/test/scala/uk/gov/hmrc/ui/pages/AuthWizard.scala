@@ -27,7 +27,8 @@ object AuthWizard extends BasePage {
   override def pageTitle: String = "auth login stub"
 
   val url: String = s"${Env.baseUrl}"
-
+  val localurlstub = "http://localhost:10081/self-assessment-forms/sa1/"
+  
   val redirectUrl: By     = By.id("redirectionUrl")
   val affinityGroup: By   = By.id("affinityGroupSelect")
   val confidenceLevel: By = By.id("confidenceLevel")
