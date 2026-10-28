@@ -23,7 +23,7 @@ import uk.gov.hmrc.selenium.webdriver.{Browser, ScreenshotOnFailure}
 import uk.gov.hmrc.ui.pages.*
 
 class SA1
-  extends AnyFeatureSpec
+    extends AnyFeatureSpec
     with BaseSpec
     with GivenWhenThen
     with ShouldVerb
@@ -38,7 +38,6 @@ class SA1
       AuthWizard.login("NM772208B", "250", "Organisation")
       When("User navigates to Start details page")
       StartPage.verifyPageTitle(StartPage.pageTitle)
-
       Then("User begins to Register for Self Assessment")
       StartPage.startNow()
 
@@ -47,9 +46,6 @@ class SA1
       Name.submitName("John", "Doe")
 
       Then("User has a previous last name")
-//      AuthWizard.navigateToPage(s"$localurlstub/previous-last-name"
-//      )
-
       AddPreviousLastName.verifyPageTitle(AddPreviousLastName.pageTitle)
       AddPreviousLastName.continueAsYes()
 
@@ -64,11 +60,25 @@ class SA1
 
       And("User enters contact details")
       ContactDetails.verifyPageTitle(ContactDetails.pageTitle)
+      ContactDetails.submitEmailAddress("user.test@digital.hmrc.co.uk")
+      ContactDetails.submitPhoneNumber("+77421384211")
+      saveAndContinue()
 
-      //      Then("User searches for address")
-      //      And("User finds address")
-      //      And("User enters address")
-      //      Then("User reviews address")
+      Then("User enters an address")
+      SelectCountry.verifyPageTitle(SelectCountry.pageTitle)
+      SelectCountry.submitCountry("United Kingdom")
+      SearchAddress.SearchAddress(TrustFindAddress.pageTitle)
+      SearchAddress.chooseManualAddress()
+      EnterAddress.verifyPageTitle(EnterAddress.pageTitle)
+      EnterAddress.enterManualAddress(
+        "25 Oakley Road",
+        "Flat 69",
+        "Lane 4",
+        "City of Test",
+        "Z11 1ZZ"
+      )
+      ReviewAddress.confirmAddress()
+
       //      And("User enters date of when they moved to their address")
       //      Then("User has a National Insurance Number")
       //      Then("User does not have a National Insurance Number")

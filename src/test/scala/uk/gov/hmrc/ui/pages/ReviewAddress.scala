@@ -22,5 +22,8 @@ object ReviewAddress extends BasePage {
 
   override def pageTitle: String =
     "Review your address - Registering for Self Assessment - GOV.UK"
+
+  def confirmAddress(): Unit =
+    saveAndContinue()
 }
 //

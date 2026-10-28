@@ -26,9 +26,9 @@ object AuthWizard extends BasePage {
 
   override def pageTitle: String = "auth login stub"
 
-  val url: String = s"${Env.baseUrl}"
+  val url: String  = s"${Env.baseUrl}"
   val localurlstub = "http://localhost:10081/self-assessment-forms/sa1/"
-  
+
   val redirectUrl: By     = By.id("redirectionUrl")
   val affinityGroup: By   = By.id("affinityGroupSelect")
   val confidenceLevel: By = By.id("confidenceLevel")
@@ -49,10 +49,10 @@ object AuthWizard extends BasePage {
     val Redirect =
       if (
         Env.baseUrl.equals(
-          "http://localhost:9949/auth-login-stub/gg-sign-in?continue=http://localhost:10081/self-assessment/sa1/start"
+          "http://localhost:9949/auth-login-stub/gg-sign-in?continue=http://localhost:10081/self-assessment/sa1/"
         )
-      ) "localhost:10081/self-assessment/sa1/start"
-      else s"/self-assessment-forms/sa1/start"
+      ) "localhost:10081/self-assessment/sa1/"
+      else s"/self-assessment-forms/sa1/"
     Redirect
   }
 

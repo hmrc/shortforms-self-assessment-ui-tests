@@ -23,12 +23,11 @@ object AddPreviousLastName extends BasePage {
   override def pageTitle: String =
     "Do you have a previous last name? - Registering for Self Assessment - GOV.UK"
 
-
   def continueAsYes(): Unit = {
-      radioButton(Locators.rdoYes)
-      saveAndContinue()
+    radioButton(Locators.rdoYes)
+    saveAndContinue()
   }
-  
+
   def continueAsNo(): Unit = {
     radioButton(Locators.rdoNo)
     saveAndContinue()

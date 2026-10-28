@@ -22,5 +22,14 @@ object SearchAddress extends BasePage {
 
   override def pageTitle: String =
     "Search for your address - Registering for Self Assessment - GOV.UK"
+
+  def submitPostalCode(subcontractorPostalCode: String): Unit = {
+    input(Locators.txtPostalcode, subcontractorPostalCode)
+    saveAndContinue()
+  }
+
+  def chooseManualAddress(): Unit =
+    clickLinkById(Locators.lnkmanualAddress)
+}
 }
 //

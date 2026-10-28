@@ -22,5 +22,12 @@ object SelectCountry extends BasePage {
 
   override def pageTitle: String =
     "What is the country or territory of your home address? - Registering for Self Assessment - GOV.UK"
+
+  def submitCountry(subcontractorCountry: String): Unit = {
+    input(Locators.txtCountry, subcontractorCountry)
+    clickCountryDropdown()
+    saveAndContinue()
+  }
+
 }
 //

@@ -24,13 +24,11 @@ object ContactDetails extends BasePage {
     "What are your contact details? - Registering for Self Assessment - GOV.UK"
 
   def submitEmailAddress(emailAddress: String): Unit = {
-      input(Locators.txtEmailAddress, emailAddress)
-      saveAndContinue()
+    input(Locators.txtEmailAddress, emailAddress)
   }
 
-  def submitMobileDetails(PhoneNumber: String): Unit = {
-      input(Locators.txtPhoneNumber, PhoneNumber)
-      saveAndContinue()
+  def submitPhoneNumber(PhoneNumber: String): Unit = {
+    input(Locators.txtPhoneNumber, PhoneNumber)
   }
 }
 //
