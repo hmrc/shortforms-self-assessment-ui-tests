@@ -24,12 +24,12 @@ object EnterAddress extends BasePage {
     "What is your address? - Registering for Self Assessment - GOV.UK"
 
   def enterManualAddress(
-                          addressLine1: String,
-                          addressLine2: String,
-                          addressLine3: String,
-                          town: String,
-                          postcode: String
-                        ): Unit = {
+    addressLine1: String,
+    addressLine2: String,
+    addressLine3: String,
+    town: String,
+    postcode: String
+  ): Unit = {
     input(Locators.txtAddressLine1, addressLine1)
     input(Locators.txtAddressLine2, addressLine2)
     input(Locators.txtAddressLine3, addressLine3)

@@ -39,43 +39,43 @@ trait BasePage extends PageObject with Eventually with Matchers with LazyLogging
 
   /** Locator values */
   object Locators {
-    val btnContinue = "//*[contains(@class,'govuk-button') and normalize-space()='Continue']"
-    val btnSaveAndContinue = "//*[contains(@class,'govuk-button') and normalize-space()='Save and continue']"
-    val btnConfirmAndContinue = "//*[contains(@class,'govuk-button') and normalize-space()='Confirm and continue']"
-    val btnConfirmAndSubmit = "//*[contains(@class,'govuk-button') and normalize-space()='Confirm and submit']"
-    val btnAddPurchaser = "//*[contains(@class,'govuk-button') and normalize-space()='Add a purchaser']"
-    val btnConfirmAddress = "continue"
-    val lnkBack = "Back"
-    val btnSubmit = ".govuk-button"
-    val lnkHeader = ".govuk-header__link.govuk-header__service-name"
-    val rdoYes = "#value_0"
-    val rdoNo = "#value_1"
-    val txtFileName = ".govuk-body"
-    val paragraphText = By.ByClassName("govuk-body")
-    val txtBannerTitle = "#govuk-notification-banner-title"
-    val lnkRemoveFile = "dd[class='govuk-summary-list__actions'] a[class='govuk-link']"
-    val txtPostCode: By = By.ById("postcode")
-    val txtAddress1: By = By.ById("line1")
-    val txtTown: By = By.ById("town")
-    val txtAddressPostCode = By.ById("postcode")
-    val lnkAddrManually = "Enter the address manually"
-    val cbxConfirm = "#value_0"
-    val txtFirstName: By = By.ById("#firstName")
-    val txtLastName: By = By.ById("#lastName")
+    val btnContinue             = "//*[contains(@class,'govuk-button') and normalize-space()='Continue']"
+    val btnSaveAndContinue      = "//*[contains(@class,'govuk-button') and normalize-space()='Save and continue']"
+    val btnConfirmAndContinue   = "//*[contains(@class,'govuk-button') and normalize-space()='Confirm and continue']"
+    val btnConfirmAndSubmit     = "//*[contains(@class,'govuk-button') and normalize-space()='Confirm and submit']"
+    val btnAddPurchaser         = "//*[contains(@class,'govuk-button') and normalize-space()='Add a purchaser']"
+    val btnConfirmAddress       = "continue"
+    val lnkBack                 = "Back"
+    val btnSubmit               = ".govuk-button"
+    val lnkHeader               = ".govuk-header__link.govuk-header__service-name"
+    val rdoYes                  = "#value_0"
+    val rdoNo                   = "#value_1"
+    val txtFileName             = ".govuk-body"
+    val paragraphText           = By.ByClassName("govuk-body")
+    val txtBannerTitle          = "#govuk-notification-banner-title"
+    val lnkRemoveFile           = "dd[class='govuk-summary-list__actions'] a[class='govuk-link']"
+    val txtPostCode: By         = By.ById("postcode")
+    val txtAddress1: By         = By.ById("line1")
+    val txtTown: By             = By.ById("town")
+    val txtAddressPostCode      = By.ById("postcode")
+    val lnkAddrManually         = "Enter the address manually"
+    val cbxConfirm              = "#value_0"
+    val txtFirstName: By        = By.ById("#firstName")
+    val txtLastName: By         = By.ById("#lastName")
     val txtPreviousLastName: By = By.ById("#previousLastName")
-    val txtDay: By = By.ById("lastNameChangeDate.day")
-    val txtMonth: By = By.ById("lastNameChangeDate.month")
-    val txtYear: By = By.ById("lastNameChangeDate.year")
-    val txtEmailAddress: By = By.ById("emailAddress")
-    val txtPhoneNumber: By = By.ById("phoneNumber")
-    val txtCountry: By = By.ById("countryCode")
-    val txtPostalcode: By = By.ById("postcode")
-    val lnkmanualAddress = "manualAddress"
-    val txtAddressLine1: By = By.ById("line1")
-    val txtAddressLine2: By = By.ById("line2")
-    val txtAddressLine3: By = By.ById("line3")
-    val txtTown: By = By.ById("town")
-    val txtPostalcode: By = By.ById("postcode")
+    val txtDay: By              = By.ById("lastNameChangeDate.day")
+    val txtMonth: By            = By.ById("lastNameChangeDate.month")
+    val txtYear: By             = By.ById("lastNameChangeDate.year")
+    val txtEmailAddress: By     = By.ById("emailAddress")
+    val txtPhoneNumber: By      = By.ById("phoneNumber")
+    val txtCountry: By          = By.ById("countryCode")
+    val txtPostalcode: By       = By.ById("postcode")
+    val lnkmanualAddress        = "manualAddress"
+    val txtAddressLine1: By     = By.ById("line1")
+    val txtAddressLine2: By     = By.ById("line2")
+    val txtAddressLine3: By     = By.ById("line3")
+    val txtTown: By             = By.ById("town")
+    val txtPostalcode: By       = By.ById("postcode")
   }
 
   def pageUrl: String
@@ -95,20 +95,20 @@ trait BasePage extends PageObject with Eventually with Matchers with LazyLogging
 
   /** Method to input values into date, month and year fields */
   def inputDateMonthAndYear(
-                             dateSelector: By,
-                             monthSelector: By,
-                             yearSelector: By,
-                             dateValue: String,
-                             monthValue: String,
-                             yearValue: String
-                           ): Unit = {
-    val dateElement = waitForVisibilityOfElement(dateSelector)
+    dateSelector: By,
+    monthSelector: By,
+    yearSelector: By,
+    dateValue: String,
+    monthValue: String,
+    yearValue: String
+  ): Unit = {
+    val dateElement  = waitForVisibilityOfElement(dateSelector)
     dateElement.clear()
     dateElement.sendKeys(dateValue)
     val monthElement = waitForVisibilityOfElement(monthSelector)
     monthElement.clear()
     monthElement.sendKeys(monthValue)
-    val yearElement = waitForVisibilityOfElement(yearSelector)
+    val yearElement  = waitForVisibilityOfElement(yearSelector)
     yearElement.clear()
     yearElement.sendKeys(yearValue)
   }
@@ -170,16 +170,16 @@ trait BasePage extends PageObject with Eventually with Matchers with LazyLogging
 
   /** Radio button interaction */
   def radioButton(optionalValue: String): Unit = {
-    val element: WebElement = driver.findElement(By.cssSelector(optionalValue))
+    val element: WebElement    = driver.findElement(By.cssSelector(optionalValue))
     val ex: JavascriptExecutor = driver.asInstanceOf[JavascriptExecutor]
     ex.executeScript("arguments[0].click()", element)
   }
 
   /** Checkbox interaction */
   def checkbox(optionalValue: String, shouldSelect: Boolean): Unit = {
-    val element: WebElement = driver.findElement(By.cssSelector(optionalValue))
+    val element: WebElement    = driver.findElement(By.cssSelector(optionalValue))
     val ex: JavascriptExecutor = driver.asInstanceOf[JavascriptExecutor]
-    val isChecked: Boolean = element.isSelected
+    val isChecked: Boolean     = element.isSelected
     if (shouldSelect && !isChecked) {
       ex.executeScript("arguments[0].click()", element)
     } else if (!shouldSelect && isChecked) {
@@ -209,9 +209,9 @@ trait BasePage extends PageObject with Eventually with Matchers with LazyLogging
     fluentWait.until(ExpectedConditions.titleContains(expectedTitle))
 
   def submitDate(): Unit = {
-    val randomDay = Random.nextInt(30) + 1
+    val randomDay   = Random.nextInt(30) + 1
     val randomMonth = Random.nextInt(12) + 1
-    val randomYear = Random.nextInt(9999 - 1753 + 1) + 1753
+    val randomYear  = Random.nextInt(9999 - 1753 + 1) + 1753
 
     inputDayMonthAndYear(
       Locators.txtDay,
@@ -226,20 +226,20 @@ trait BasePage extends PageObject with Eventually with Matchers with LazyLogging
 
   /** Method to input values into day, month and year fields */
   def inputDayMonthAndYear(
-                            daySelector: By,
-                            monthSelector: By,
-                            yearSelector: By,
-                            dayValue: String,
-                            monthValue: String,
-                            yearValue: String
-                          ): Unit = {
-    val dayElement = waitForVisibilityOfElement(daySelector)
+    daySelector: By,
+    monthSelector: By,
+    yearSelector: By,
+    dayValue: String,
+    monthValue: String,
+    yearValue: String
+  ): Unit = {
+    val dayElement   = waitForVisibilityOfElement(daySelector)
     dayElement.clear()
     dayElement.sendKeys(dayValue)
     val monthElement = waitForVisibilityOfElement(monthSelector)
     monthElement.clear()
     monthElement.sendKeys(monthValue)
-    val yearElement = waitForVisibilityOfElement(yearSelector)
+    val yearElement  = waitForVisibilityOfElement(yearSelector)
     yearElement.clear()
     yearElement.sendKeys(yearValue)
   }

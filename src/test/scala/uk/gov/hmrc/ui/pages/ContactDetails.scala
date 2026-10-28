@@ -23,12 +23,10 @@ object ContactDetails extends BasePage {
   override def pageTitle: String =
     "What are your contact details? - Registering for Self Assessment - GOV.UK"
 
-  def submitEmailAddress(emailAddress: String): Unit = {
+  def submitEmailAddress(emailAddress: String): Unit =
     input(Locators.txtEmailAddress, emailAddress)
-  }
 
-  def submitPhoneNumber(PhoneNumber: String): Unit = {
+  def submitPhoneNumber(PhoneNumber: String): Unit =
     input(Locators.txtPhoneNumber, PhoneNumber)
-  }
 }
 //
