@@ -74,8 +74,7 @@ trait BasePage extends PageObject with Eventually with Matchers with LazyLogging
     val txtAddressLine1: By     = By.ById("line1")
     val txtAddressLine2: By     = By.ById("line2")
     val txtAddressLine3: By     = By.ById("line3")
-    val txtTown: By             = By.ById("town")
-    val txtPostalcode: By       = By.ById("postcode")
+    val countryDropdown = "#countryCode__listbox"
   }
 
   def pageUrl: String
@@ -145,6 +144,8 @@ trait BasePage extends PageObject with Eventually with Matchers with LazyLogging
   def header(): Unit = click(By.cssSelector(Locators.lnkHeader))
 
   def removeFile(): Unit = click(By.cssSelector(Locators.lnkRemoveFile))
+
+  def clickCountryDropdown(): Unit = click(By.cssSelector(Locators.countryDropdown))
 
   /** Navigation methods */
   def navigateToPage(url: String): Unit = driver.navigate().to(url)

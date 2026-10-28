@@ -62,12 +62,12 @@ class SA1
       ContactDetails.verifyPageTitle(ContactDetails.pageTitle)
       ContactDetails.submitEmailAddress("user.test@digital.hmrc.co.uk")
       ContactDetails.submitPhoneNumber("+77421384211")
-      saveAndContinue()
+      ContactDetails.saveAndContinue()
 
       Then("User enters an address")
       SelectCountry.verifyPageTitle(SelectCountry.pageTitle)
       SelectCountry.submitCountry("United Kingdom")
-      SearchAddress.SearchAddress(TrustFindAddress.pageTitle)
+      SearchAddress.verifyPageTitle(SearchAddress.pageTitle)
       SearchAddress.chooseManualAddress()
       EnterAddress.verifyPageTitle(EnterAddress.pageTitle)
       EnterAddress.enterManualAddress(
