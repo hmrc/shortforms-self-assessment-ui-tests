@@ -31,5 +31,4 @@ object SearchAddress extends BasePage {
   def chooseManualAddress(): Unit =
     clickLinkById(Locators.lnkmanualAddress)
 }
-}
 //
