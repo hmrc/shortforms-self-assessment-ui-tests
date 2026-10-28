@@ -74,7 +74,7 @@ trait BasePage extends PageObject with Eventually with Matchers with LazyLogging
     val txtAddressLine1: By     = By.ById("line1")
     val txtAddressLine2: By     = By.ById("line2")
     val txtAddressLine3: By     = By.ById("line3")
-    val countryDropdown = "#countryCode__listbox"
+    val countryDropdown         = "#countryCode__listbox"
   }
 
   def pageUrl: String
