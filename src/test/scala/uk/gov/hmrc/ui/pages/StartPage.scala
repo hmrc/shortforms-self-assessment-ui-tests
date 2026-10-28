@@ -22,5 +22,8 @@ object StartPage extends BasePage {
 
   override def pageTitle: String =
     "Register for Self Assessment - Registering for Self Assessment - GOV.UK"
+
+  def startNow(): Unit =
+    clickSubmitButton()
 }
 //
