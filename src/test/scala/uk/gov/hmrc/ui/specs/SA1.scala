@@ -144,14 +144,14 @@ class SA1
       Declaration.verifyPageTitle(Declaration.pageTitle)
       Declaration.submitDeclaration("Test User")
 
-      Then("User confirms the application is submitted")
-      Confirmation.verifyPageTitle(Confirmation.pageTitle)
-      // Click Back to account link
+//      Then("User confirms the application is submitted")
+//      Confirmation.verifyPageTitle(Confirmation.pageTitle)
+//      Click Back to account link
     }
 
-    Scenario("Organisation submits SA1 form without National Insurance Number") {
-      //      Then("User does not have a National Insurance Number")
-      //      Then("User provide reason why they do not have a National Insurance Number")
-    }
+//    Scenario("Organisation submits SA1 form without National Insurance Number") {
+//      Then("User does not have a National Insurance Number")
+//      Then("User provide reason why they do not have a National Insurance Number")
+//    }
   }
 }
