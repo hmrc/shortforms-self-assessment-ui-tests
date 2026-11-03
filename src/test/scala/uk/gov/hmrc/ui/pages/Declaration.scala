@@ -26,6 +26,6 @@ object Declaration extends BasePage {
   def submitDeclaration(fullName: String): Unit =
     input(Locators.txtInput, fullName)
     confirmAndSubmit()
-    
+
 }
 //

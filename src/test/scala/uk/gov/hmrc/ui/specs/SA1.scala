@@ -146,7 +146,7 @@ class SA1
 
       Then("User confirms the application is submitted")
       Confirmation.verifyPageTitle(Confirmation.pageTitle)
-      //Click Back to account link
+      // Click Back to account link
     }
 
     Scenario("Organisation submits SA1 form without National Insurance Number") {

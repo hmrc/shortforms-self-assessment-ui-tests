@@ -22,6 +22,6 @@ object Confirmation extends BasePage {
 
   override def pageTitle: String =
     "Confirmation - Registering for Self Assessment - GOV.UK"
-  
+
 }
 //
