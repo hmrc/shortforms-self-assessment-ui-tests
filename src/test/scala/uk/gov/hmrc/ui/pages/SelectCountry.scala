@@ -26,7 +26,7 @@ object SelectCountry extends BasePage {
   def submitCountry(subcontractorCountry: String): Unit = {
     input(Locators.txtCountry, subcontractorCountry)
     clickCountryDropdown()
-    saveAndContinue()
+    clickContinueButton()
   }
 
 }

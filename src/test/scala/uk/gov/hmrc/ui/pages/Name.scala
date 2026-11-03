@@ -26,7 +26,7 @@ object Name extends BasePage {
   def submitName(firstName: String, lastName: String): Unit = {
     input(Locators.txtFirstName, firstName)
     input(Locators.txtLastName, lastName)
-    saveAndContinue()
+    clickContinueButton()
   }
 }
 //

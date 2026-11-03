@@ -32,10 +32,12 @@ class SA1
     with Browser
     with ScreenshotOnFailure {
 
-  Feature("Short forms start page Journeys") {
-    Scenario("Open start page with confidence level above 250") {
-      Given("User enters login using the Authority Wizard page")
-      AuthWizard.login("NM772208B", "250", "Organisation")
+  val nino = "NM772208B"
+
+  Feature("SA1 Self Assessment Application Form") {
+    Scenario("Organisation submits SA1 form") {
+      Given("User enters login using the Authority Wizard page with confidence level above 250")
+      AuthWizard.login(nino, "250", "Organisation")
       When("User navigates to Start details page")
       StartPage.verifyPageTitle(StartPage.pageTitle)
       Then("User begins to Register for Self Assessment")
@@ -53,16 +55,18 @@ class SA1
       PreviousLastName.verifyPageTitle(PreviousLastName.pageTitle)
       PreviousLastName.submitPreviousLastName("LastName")
       PreviousLastName.submitDate()
+      PreviousLastName.clickContinueButton()
 
       Then("User enters date of birth")
       DateOfBirth.verifyPageTitle(DateOfBirth.pageTitle)
-      DateOfBirth.submitDate()
+      DateOfBirth.submitDoB()
+      DateOfBirth.clickContinueButton()
 
       And("User enters contact details")
       ContactDetails.verifyPageTitle(ContactDetails.pageTitle)
       ContactDetails.submitEmailAddress("user.test@digital.hmrc.co.uk")
       ContactDetails.submitPhoneNumber("+77421384211")
-      ContactDetails.saveAndContinue()
+      ContactDetails.clickContinueButton()
 
       Then("User enters an address")
       SelectCountry.verifyPageTitle(SelectCountry.pageTitle)
@@ -79,21 +83,75 @@ class SA1
       )
       ReviewAddress.confirmAddress()
 
-      //      And("User enters date of when they moved to their address")
-      //      Then("User has a National Insurance Number")
+      And("User enters date of when they moved to their address")
+      AddressMoveDate.verifyPageTitle(AddressMoveDate.pageTitle)
+
+      Then("User has a National Insurance Number")
+      AddNino.verifyPageTitle(AddNino.pageTitle)
+      AddNino.continueAsYes()
+
+      And("User inputs a National Insurance Number")
+      Nino.verifyPageTitle(AddNino.pageTitle)
+      Nino.submitNino(nino)
+
+      And("User provides reasons they need to complete a tax return")
+      TaxReturnReasons.verifyPageTitle(TaxReturnReasons.pageTitle)
+      TaxReturnReasons.selectAllCheckboxes()
+      TaxReturnReasons.clickContinueButton()
+
+      Then("User enters date of when they get untaxed income as a director")
+      DateUntaxedIncomeDirector.verifyPageTitle(DateUntaxedIncomeDirector.pageTitle)
+      DateUntaxedIncomeDirector.submitDate()
+
+      And("User enters date of when they start getting income from land and property in the UK")
+      DateLandProperty.verifyPageTitle(DateLandProperty.pageTitle)
+      DateLandProperty.submitDate()
+
+      And("User enters date of when they start getting taxable foreign income")
+      DateTaxableForeignIncome.verifyPageTitle(DateTaxableForeignIncome.pageTitle)
+      DateTaxableForeignIncome.submitDate()
+
+      And("User enters date of when they started getting income from a trust or settlement")
+      DateTrustSettlement.verifyPageTitle(DateTrustSettlement.pageTitle)
+      DateTrustSettlement.submitDate()
+
+      And("User enters date of when their income first exceeded the threshold")
+      DateAnnualIncome.verifyPageTitle(DateAnnualIncome.pageTitle)
+      DateAnnualIncome.submitDate()
+
+      And("User enters date of when they started getting untaxed income which was not collected through PAYE tax code")
+      DateUntaxedIncomePAYE.verifyPageTitle(DateUntaxedIncomePAYE.pageTitle)
+      DateUntaxedIncomePAYE.submitDate()
+
+      And("User enters date of when they start getting High income child benefit charge foreign income")
+      DateHighIncomeChildBenefit.verifyPageTitle(DateHighIncomeChildBenefit.pageTitle)
+      DateHighIncomeChildBenefit.submitDate()
+
+      And("User enters the last date of the tax year in which they owe Capital Gains Tax")
+      DateCapitalGainsTax.verifyPageTitle(DateCapitalGainsTax.pageTitle)
+      DateCapitalGainsTax.submitDate()
+
+      And("User enters any other reason for the need to complete a tax return")
+      OtherReason.verifyPageTitle(OtherReason.pageTitle)
+      OtherReason.inputOtherReason("This is the reason to complete a tax return.")
+      OtherReason.submitDate()
+
+      Then("User checks their answers before submitting the application")
+      CheckYourAnswers.verifyPageTitle(CheckYourAnswers.pageTitle)
+      CheckYourAnswers.clickContinueButton()
+
+      And("User declares that the information provided is correct")
+      Declaration.verifyPageTitle(Declaration.pageTitle)
+      Declaration.submitDeclaration("Test User")
+
+      Then("User confirms the application is submitted")
+      Confirmation.verifyPageTitle(Confirmation.pageTitle)
+      //Click Back to account link
+    }
+
+    Scenario("Organisation submits SA1 form without National Insurance Number") {
       //      Then("User does not have a National Insurance Number")
-      //      And("User provides reasons they need to complete a tax return")
-      //      Then("User enters date of when they get untaxed income as a director")
-      //      And("User enters date of when they start getting taxable foreign income")
-      //      And("User enters date of when they start getting income from land and property in the UK")
-      //      And("User enters date of when they start getting High income child benefit charge foreign income")
-      //      And("User enters date of when their income first exceeded the threshold")
-      //      And("User enters date of when they started getting untaxed income which was not collected through PAYE tax code")
-      //      And("User enters date of when they started getting income from a trust or settlement")
-      //      And("User enters the last date of the tax year in which they owe Capital Gains Tax")
-      //      And("User enters any other reason for the need to complete a tax return")
-      //      Then("User checks their answers before submitting the application")
-      //      And("User declares that the information provided is correct")
+      //      Then("User provide reason why they do not have a National Insurance Number")
     }
   }
 }

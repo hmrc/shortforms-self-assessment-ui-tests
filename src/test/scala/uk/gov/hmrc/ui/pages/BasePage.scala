@@ -27,6 +27,9 @@ import uk.gov.hmrc.ui.driver.BrowserDriver
 
 import java.time.Duration
 import scala.util.Random
+import java.time.LocalDate
+import java.time.temporal.ChronoUnit
+import scala.jdk.CollectionConverters
 
 trait BasePage extends PageObject with Eventually with Matchers with LazyLogging with BrowserDriver {
 
@@ -48,8 +51,8 @@ trait BasePage extends PageObject with Eventually with Matchers with LazyLogging
     val lnkBack                 = "Back"
     val btnSubmit               = ".govuk-button"
     val lnkHeader               = ".govuk-header__link.govuk-header__service-name"
-    val rdoYes                  = "#value_0"
-    val rdoNo                   = "#value_1"
+    val rdoYes                  = "#value"
+    val rdoNo                   = "#value-2"
     val txtFileName             = ".govuk-body"
     val paragraphText           = By.ByClassName("govuk-body")
     val txtBannerTitle          = "#govuk-notification-banner-title"
@@ -60,12 +63,15 @@ trait BasePage extends PageObject with Eventually with Matchers with LazyLogging
     val txtAddressPostCode      = By.ById("postcode")
     val lnkAddrManually         = "Enter the address manually"
     val cbxConfirm              = "#value_0"
-    val txtFirstName: By        = By.ById("#firstName")
-    val txtLastName: By         = By.ById("#lastName")
-    val txtPreviousLastName: By = By.ById("#previousLastName")
-    val txtDay: By              = By.ById("lastNameChangeDate.day")
-    val txtMonth: By            = By.ById("lastNameChangeDate.month")
-    val txtYear: By             = By.ById("lastNameChangeDate.year")
+    val txtFirstName: By        = By.ById("firstName")
+    val txtLastName: By         = By.ById("lastName")
+    val txtPreviousLastName: By = By.ById("previousLastName")
+    val txtDay: By              = By.id("lastNameChangeDate.day")
+    val txtMonth: By            = By.id("lastNameChangeDate.month")
+    val txtYear: By             = By.id("lastNameChangeDate.year")
+    val txtDoBDay: By           = By.id("dateOfBirth.day")
+    val txtDoBMonth: By         = By.id("dateOfBirth.month")
+    val txtDoBYear: By          = By.id("dateOfBirth.year")
     val txtEmailAddress: By     = By.ById("emailAddress")
     val txtPhoneNumber: By      = By.ById("phoneNumber")
     val txtCountry: By          = By.ById("countryCode")
@@ -75,6 +81,8 @@ trait BasePage extends PageObject with Eventually with Matchers with LazyLogging
     val txtAddressLine2: By     = By.ById("line2")
     val txtAddressLine3: By     = By.ById("line3")
     val countryDropdown         = "#countryCode__listbox"
+    val txtInput: By            = By.ById("value")
+    val txtOtherReason: By      = By.ById("reason")
   }
 
   def pageUrl: String
@@ -209,40 +217,101 @@ trait BasePage extends PageObject with Eventually with Matchers with LazyLogging
   def waitForPageTitle(expectedTitle: String): Unit =
     fluentWait.until(ExpectedConditions.titleContains(expectedTitle))
 
-  def submitDate(): Unit = {
-    val randomDay   = Random.nextInt(30) + 1
-    val randomMonth = Random.nextInt(12) + 1
-    val randomYear  = Random.nextInt(9999 - 1753 + 1) + 1753
+//  def submitDate(randomDay: String, randomMonth: String, randomYear: String): Unit = {
+//    val randomDay   = Random.nextInt(30) + 1
+//    val randomMonth = Random.nextInt(12) + 1
+//    val randomYear  = Random.nextInt(9999 - 1753 + 1) + 1753
+//    print(randomDay)
+//    print(randomMonth)
+//    print(randomYear)
+//
+//    inputDayMonthAndYear(
+//      Locators.txtDay,
+//      Locators.txtMonth,
+//      Locators.txtYear,
+//      randomDay.toString,
+//      randomMonth.toString,
+//      randomYear.toString
+//    )
+//  }
+//
+//  /** Method to input values into day, month and year fields */
+//  def inputDayMonthAndYear(
+//    daySelector: By,
+//    monthSelector: By,
+//    yearSelector: By,
+//    dayValue: String,
+//    monthValue: String,
+//    yearValue: String
+//  ): Unit = {
+//    val dayElement   = waitForVisibilityOfElement(daySelector)
+//    dayElement.clear()
+//    dayElement.sendKeys(dayValue)
+//    val monthElement = waitForVisibilityOfElement(monthSelector)
+//    monthElement.clear()
+//    monthElement.sendKeys(monthValue)
+//    val yearElement  = waitForVisibilityOfElement(yearSelector)
+//    yearElement.clear()
+//    yearElement.sendKeys(yearValue)
+//  }
 
-    inputDayMonthAndYear(
-      Locators.txtDay,
-      Locators.txtMonth,
-      Locators.txtYear,
-      randomDay.toString,
-      randomMonth.toString,
-      randomYear.toString
-    )
-    saveAndContinue()
+  def submitDate(): Unit = {
+
+    val startDate = LocalDate.of(1753, 1, 3)
+    val endDate   = LocalDate.now()
+
+    val daysBetween = ChronoUnit.DAYS.between(startDate, endDate)
+    val randomDays  = Random.nextLong(daysBetween + 1)
+
+    val randomDate = startDate.plusDays(randomDays)
+
+    val day   = randomDate.getDayOfMonth.toString
+    val month = randomDate.getMonthValue.toString
+    val year  = randomDate.getYear.toString
+
+    println(s"Random date: $day/$month/$year")
+
+    val dayElement = waitForVisibilityOfElement(Locators.txtDay)
+    dayElement.clear()
+    dayElement.sendKeys(day)
+
+    val monthElement = waitForVisibilityOfElement(Locators.txtMonth)
+    monthElement.clear()
+    monthElement.sendKeys(month)
+
+    val yearElement = waitForVisibilityOfElement(Locators.txtYear)
+    yearElement.clear()
+    yearElement.sendKeys(year)
   }
 
-  /** Method to input values into day, month and year fields */
-  def inputDayMonthAndYear(
-    daySelector: By,
-    monthSelector: By,
-    yearSelector: By,
-    dayValue: String,
-    monthValue: String,
-    yearValue: String
-  ): Unit = {
-    val dayElement   = waitForVisibilityOfElement(daySelector)
+  def submitDoB(): Unit = {
+
+    val startDate = LocalDate.of(1906, 1, 1)
+    val endDate   = LocalDate.now().minusYears(15).minusMonths(9)
+
+    val daysBetween = ChronoUnit.DAYS.between(startDate, endDate)
+    val randomDays  = Random.nextLong(daysBetween + 1)
+
+    val randomDate = startDate.plusDays(randomDays)
+
+    val day   = randomDate.getDayOfMonth.toString
+    val month = randomDate.getMonthValue.toString
+    val year  = randomDate.getYear.toString
+
+    println(s"Random date: $day/$month/$year")
+
+    val dayElement = waitForVisibilityOfElement(Locators.txtDoBDay)
     dayElement.clear()
-    dayElement.sendKeys(dayValue)
-    val monthElement = waitForVisibilityOfElement(monthSelector)
+    dayElement.sendKeys(day)
+
+    val monthElement = waitForVisibilityOfElement(Locators.txtDoBMonth)
     monthElement.clear()
-    monthElement.sendKeys(monthValue)
-    val yearElement  = waitForVisibilityOfElement(yearSelector)
+    monthElement.sendKeys(month)
+
+    val yearElement = waitForVisibilityOfElement(Locators.txtDoBYear)
     yearElement.clear()
-    yearElement.sendKeys(yearValue)
+    yearElement.sendKeys(year)
+
   }
 }
 //

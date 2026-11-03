@@ -16,6 +16,8 @@
 
 package uk.gov.hmrc.ui.pages
 
+import uk.gov.hmrc.ui.pages.SelectCountry.clickContinueButton
+
 object ReviewAddress extends BasePage {
 
   override def pageUrl: String = "self-assessment-forms/sa1/address"
@@ -24,6 +26,6 @@ object ReviewAddress extends BasePage {
     "Review your address - Registering for Self Assessment - GOV.UK"
 
   def confirmAddress(): Unit =
-    saveAndContinue()
+    clickContinueButton()
 }
 //

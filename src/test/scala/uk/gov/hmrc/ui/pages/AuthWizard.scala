@@ -49,10 +49,10 @@ object AuthWizard extends BasePage {
     val Redirect =
       if (
         Env.baseUrl.equals(
-          "http://localhost:9949/auth-login-stub/gg-sign-in?continue=http://localhost:10081/self-assessment/sa1/"
+          "http://localhost:10081/auth-login-stub/gg-sign-in?continue=http://localhost:10081/self-assessment-forms/sa1/start"
         )
-      ) "localhost:10081/self-assessment/sa1/"
-      else s"/self-assessment-forms/sa1/"
+      ) "localhost:10081/self-assessment-forms/sa1/start"
+      else s"http://localhost:10081/self-assessment-forms/sa1/"
     Redirect
   }
 

@@ -16,6 +16,8 @@
 
 package uk.gov.hmrc.ui.pages
 
+import uk.gov.hmrc.ui.pages.SelectCountry.clickContinueButton
+
 object SearchAddress extends BasePage {
 
   override def pageUrl: String = "self-assessment-forms/sa1/address"
@@ -25,7 +27,7 @@ object SearchAddress extends BasePage {
 
   def submitPostalCode(subcontractorPostalCode: String): Unit = {
     input(Locators.txtPostalcode, subcontractorPostalCode)
-    saveAndContinue()
+    clickContinueButton()
   }
 
   def chooseManualAddress(): Unit =

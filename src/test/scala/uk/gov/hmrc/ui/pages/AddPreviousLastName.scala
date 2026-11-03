@@ -25,12 +25,12 @@ object AddPreviousLastName extends BasePage {
 
   def continueAsYes(): Unit = {
     radioButton(Locators.rdoYes)
-    saveAndContinue()
+    clickContinueButton()
   }
 
   def continueAsNo(): Unit = {
     radioButton(Locators.rdoNo)
-    saveAndContinue()
+    clickContinueButton()
   }
 }
 //

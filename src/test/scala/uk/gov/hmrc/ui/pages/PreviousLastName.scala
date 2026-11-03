@@ -16,11 +16,6 @@
 
 package uk.gov.hmrc.ui.pages
 
-import org.scalactic.Prettifier.default
-import uk.gov.hmrc.ui.pages.Name.{input, saveAndContinue}
-
-import scala.util.Random
-
 object PreviousLastName extends BasePage {
 
   override def pageUrl: String = "self-assessment-forms/sa1/enter-previous-last-name"
@@ -28,9 +23,7 @@ object PreviousLastName extends BasePage {
   override def pageTitle: String =
     "Your previous last name - Registering for Self Assessment - GOV.UK"
 
-  def submitPreviousLastName(previousLastName: String): Unit = {
+  def submitPreviousLastName(previousLastName: String): Unit =
     input(Locators.txtPreviousLastName, previousLastName)
-    saveAndContinue()
-  }
 }
 //
