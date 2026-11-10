@@ -100,7 +100,8 @@ class SA1
 
       And("User provides reasons they need to complete a tax return")
       TaxReturnReasons.verifyPageTitle(TaxReturnReasons.pageTitle)
-      TaxReturnReasons.selectAllCheckboxes()
+      TaxReturnReasons.unselectAllCheckboxes()
+      TaxReturnReasons.unselectAllCheckboxes()
       TaxReturnReasons.clickContinueButton()
 
       Then("User enters date of when they get untaxed income as a director")

@@ -33,6 +33,42 @@ object TaxReturnReasons extends BasePage {
       .asScala
       .filterNot(_.isSelected)
       .foreach(_.click())
-}
 
+  def unselectAllCheckboxes(): Unit =
+    driver
+      .findElements(By.cssSelector("input[type='checkbox']"))
+      .asScala
+      .filter(_.isSelected)
+      .foreach(_.click())
+
+
+  val cbkDirectorUntaxedEarnings = "#value_0"
+  val cbkIncomeLandAndProperty = "#value_1"
+  val cbkTaxableForeignIncomeDividends = "#value_2"
+  val cbkAnnualTrustOrSettlementIncome = "#value_3"
+  val cbkAnnualIncomeExceedThreshold = "#value_4"
+  val cbkUntaxedIncomeNotCollectedViaPAYE = "#value_5"
+  val cbkHighIncomeChildBenefitCharge = "#value_6"
+  val cbkCapitalGainsTax = "#value_7"
+  val cbkOtherReason = "#value_8"
+
+  def selectTaxReturnReasons(contactType: String, selected: Boolean): this.type = {
+    val contactBtn = contactType match {
+      case "Company Director Untaxed Earnings" => cbkDirectorUntaxedEarnings
+      case "Land and Property Income" => cbkIncomeLandAndProperty
+      case "Taxable Foreign Income or Dividends" => cbkTaxableForeignIncomeDividends
+      case "Trust or Settlement Income" => cbkAnnualTrustOrSettlementIncome
+      case "Annual Income Exceeds Threshold" => cbkAnnualIncomeExceedThreshold
+      case "Untaxed Income not collected via PAYE" => cbkUntaxedIncomeNotCollectedViaPAYE
+      case "High Income Child Benefit Charge" => cbkHighIncomeChildBenefitCharge
+      case "Capital Gains Tax" => cbkCapitalGainsTax
+      case "Other Reason" => cbkOtherReason
+      case _                          => throw new IllegalArgumentException(s"Invalid link: $contactType")
+    }
+    checkbox(contactBtn, selected)
+    this
+  }
+
+
+}
 //

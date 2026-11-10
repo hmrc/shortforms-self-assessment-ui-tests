@@ -22,5 +22,10 @@ object ChooseAddress extends BasePage {
 
   override def pageTitle: String =
     "Choose your address - Registering for Self Assessment - GOV.UK"
+
+  def chooseAddress(): Unit = {
+    radioButton(Locators.address1)
+    saveAndContinue()
+  }
 }
 //

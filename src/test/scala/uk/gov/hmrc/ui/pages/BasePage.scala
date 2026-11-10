@@ -79,6 +79,7 @@ trait BasePage extends PageObject with Eventually with Matchers with LazyLogging
     val countryDropdown         = "#countryCode__listbox"
     val txtInput: By            = By.ById("value")
     val txtOtherReason: By      = By.ById("reason")
+    val address1                = "#addressId"
 
     val lastNameChangeDate = DateLocators(
       By.id("lastNameChangeDate.day"),
