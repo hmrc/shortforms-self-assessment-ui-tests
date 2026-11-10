@@ -18,9 +18,9 @@ package uk.gov.hmrc.ui.pages
 
 object DateTaxableForeignIncome extends BasePage {
 
-  override def pageUrl: String = "self-assessment-forms/sa1/date-land-property-uk"
+  override def pageUrl: String = "/date-taxable-foreign-income"
 
   override def pageTitle: String =
-    "When did you start getting income from land and property in the UK? - Registering for Self Assessment - GOV.UK"
+    "Taxable foreign income - Registering for Self Assessment - GOV.UK"
 }
 //

@@ -18,12 +18,13 @@ package uk.gov.hmrc.ui.pages
 
 object PreviousLastName extends BasePage {
 
-  override def pageUrl: String = "self-assessment-forms/sa1/enter-previous-last-name"
+  override def pageUrl: String = "/enter-previous-last-name"
 
   override def pageTitle: String =
     "Your previous last name - Registering for Self Assessment - GOV.UK"
 
   def submitPreviousLastName(previousLastName: String): Unit =
     input(Locators.txtPreviousLastName, previousLastName)
+
 }
 //

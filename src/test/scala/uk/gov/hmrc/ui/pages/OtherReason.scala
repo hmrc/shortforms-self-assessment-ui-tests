@@ -16,11 +16,9 @@
 
 package uk.gov.hmrc.ui.pages
 
-import uk.gov.hmrc.ui.pages.ContactDetails.input
-
 object OtherReason extends BasePage {
 
-  override def pageUrl: String = "self-assessment-forms/sa1/date-other-reason"
+  override def pageUrl: String = "/date-other-reason"
 
   override def pageTitle: String =
     "Other reason - Registering for Self Assessment - GOV.UK"

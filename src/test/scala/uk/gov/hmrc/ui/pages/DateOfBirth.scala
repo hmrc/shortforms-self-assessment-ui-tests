@@ -18,7 +18,7 @@ package uk.gov.hmrc.ui.pages
 
 object DateOfBirth extends BasePage {
 
-  override def pageUrl: String = "self-assessment-forms/sa1/date-of-birth"
+  override def pageUrl: String = "/date-of-birth"
 
   override def pageTitle: String =
     "What is your date of birth? - Registering for Self Assessment - GOV.UK"

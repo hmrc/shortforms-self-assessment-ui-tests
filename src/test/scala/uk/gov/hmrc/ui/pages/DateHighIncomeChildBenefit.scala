@@ -18,7 +18,7 @@ package uk.gov.hmrc.ui.pages
 
 object DateHighIncomeChildBenefit extends BasePage {
 
-  override def pageUrl: String = "self-assessment-forms/sa1/date-high-income-child-benefit"
+  override def pageUrl: String = "/date-high-income-child-benefit"
 
   override def pageTitle: String =
     "High Income Child Benefit Charge - Registering for Self Assessment - GOV.UK"

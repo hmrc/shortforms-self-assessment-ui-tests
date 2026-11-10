@@ -18,7 +18,7 @@ package uk.gov.hmrc.ui.pages
 
 object DateCapitalGainsTax extends BasePage {
 
-  override def pageUrl: String = "self-assessment-forms/sa1/date-capital-gains-tax"
+  override def pageUrl: String = "/date-capital-gains-tax"
 
   override def pageTitle: String =
     "What is the last day of the tax year in which you owe Capital Gains Tax? - Registering for Self Assessment - GOV.UK"

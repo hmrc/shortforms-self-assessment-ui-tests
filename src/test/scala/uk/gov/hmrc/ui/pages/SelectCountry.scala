@@ -18,7 +18,7 @@ package uk.gov.hmrc.ui.pages
 
 object SelectCountry extends BasePage {
 
-  override def pageUrl: String = "self-assessment-forms/sa1/address"
+  override def pageUrl: String = "/address"
 
   override def pageTitle: String =
     "What is the country or territory of your home address? - Registering for Self Assessment - GOV.UK"

@@ -18,7 +18,7 @@ package uk.gov.hmrc.ui.pages
 
 object DateTrustSettlement extends BasePage {
 
-  override def pageUrl: String = "self-assessment-forms/sa1/date-trust-settlement"
+  override def pageUrl: String = "/date-trust-settlement"
 
   override def pageTitle: String =
     "When did you start getting income from a trust or settlement? - Registering for Self Assessment - GOV.UK"

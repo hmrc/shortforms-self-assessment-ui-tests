@@ -29,7 +29,6 @@ import java.time.Duration
 import scala.util.Random
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
-import scala.jdk.CollectionConverters
 
 trait BasePage extends PageObject with Eventually with Matchers with LazyLogging with BrowserDriver {
 
@@ -66,9 +65,6 @@ trait BasePage extends PageObject with Eventually with Matchers with LazyLogging
     val txtFirstName: By        = By.ById("firstName")
     val txtLastName: By         = By.ById("lastName")
     val txtPreviousLastName: By = By.ById("previousLastName")
-    val txtDay: By              = By.id("lastNameChangeDate.day")
-    val txtMonth: By            = By.id("lastNameChangeDate.month")
-    val txtYear: By             = By.id("lastNameChangeDate.year")
     val txtDoBDay: By           = By.id("dateOfBirth.day")
     val txtDoBMonth: By         = By.id("dateOfBirth.month")
     val txtDoBYear: By          = By.id("dateOfBirth.year")
@@ -83,6 +79,72 @@ trait BasePage extends PageObject with Eventually with Matchers with LazyLogging
     val countryDropdown         = "#countryCode__listbox"
     val txtInput: By            = By.ById("value")
     val txtOtherReason: By      = By.ById("reason")
+
+    val lastNameChangeDate = DateLocators(
+      By.id("lastNameChangeDate.day"),
+      By.id("lastNameChangeDate.month"),
+      By.id("lastNameChangeDate.year")
+    )
+
+    val moveAddressDate = DateLocators(
+      By.id("moveAddressDate.day"),
+      By.id("moveAddressDate.month"),
+      By.id("moveAddressDate.year")
+    )
+
+    val dateUntaxedIncomeDirector = DateLocators(
+      By.id("dateUntaxedIncomeDirector.day"),
+      By.id("dateUntaxedIncomeDirector.month"),
+      By.id("dateUntaxedIncomeDirector.year")
+    )
+
+    val dateLandPropertyUk = DateLocators(
+      By.id("dateLandPropertyUk.day"),
+      By.id("dateLandPropertyUk.month"),
+      By.id("dateLandPropertyUk.year")
+    )
+
+    val dateTaxableForeignIncome = DateLocators(
+      By.id("value.day"),
+      By.id("value.month"),
+      By.id("value.year")
+    )
+
+    val dateTrustSettlement = DateLocators(
+      By.id("trustSettlementDate.day"),
+      By.id("trustSettlementDate.month"),
+      By.id("trustSettlementDate.year")
+    )
+
+    val dateAnnualIncome = DateLocators(
+      By.id("value.day"),
+      By.id("value.month"),
+      By.id("value.year")
+    )
+
+    val dateUntaxedIncomePAYE = DateLocators(
+      By.id("value.day"),
+      By.id("value.month"),
+      By.id("value.year")
+    )
+
+    val dateHighIncomeChildBenefit = DateLocators(
+      By.id("value.day"),
+      By.id("value.month"),
+      By.id("value.year")
+    )
+
+    val dateCapitalGainsTax = DateLocators(
+      By.id("value.day"),
+      By.id("value.month"),
+      By.id("value.year")
+    )
+
+    val dateOtherReason = DateLocators(
+      By.id("reasonDate.day"),
+      By.id("reasonDate.month"),
+      By.id("reasonDate.year")
+    )
   }
 
   def pageUrl: String
@@ -217,71 +279,35 @@ trait BasePage extends PageObject with Eventually with Matchers with LazyLogging
   def waitForPageTitle(expectedTitle: String): Unit =
     fluentWait.until(ExpectedConditions.titleContains(expectedTitle))
 
-//  def submitDate(randomDay: String, randomMonth: String, randomYear: String): Unit = {
-//    val randomDay   = Random.nextInt(30) + 1
-//    val randomMonth = Random.nextInt(12) + 1
-//    val randomYear  = Random.nextInt(9999 - 1753 + 1) + 1753
-//    print(randomDay)
-//    print(randomMonth)
-//    print(randomYear)
-//
-//    inputDayMonthAndYear(
-//      Locators.txtDay,
-//      Locators.txtMonth,
-//      Locators.txtYear,
-//      randomDay.toString,
-//      randomMonth.toString,
-//      randomYear.toString
-//    )
-//  }
-//
-//  /** Method to input values into day, month and year fields */
-//  def inputDayMonthAndYear(
-//    daySelector: By,
-//    monthSelector: By,
-//    yearSelector: By,
-//    dayValue: String,
-//    monthValue: String,
-//    yearValue: String
-//  ): Unit = {
-//    val dayElement   = waitForVisibilityOfElement(daySelector)
-//    dayElement.clear()
-//    dayElement.sendKeys(dayValue)
-//    val monthElement = waitForVisibilityOfElement(monthSelector)
-//    monthElement.clear()
-//    monthElement.sendKeys(monthValue)
-//    val yearElement  = waitForVisibilityOfElement(yearSelector)
-//    yearElement.clear()
-//    yearElement.sendKeys(yearValue)
-//  }
+  case class DateLocators(
+    day: By,
+    month: By,
+    year: By
+  )
 
-  def submitDate(): Unit = {
+  def submitDate(locators: DateLocators): Unit = {
 
-    val startDate = LocalDate.of(1753, 1, 3)
-    val endDate   = LocalDate.now()
+    val startDate = LocalDate.of(1906, 1, 3)
+    val endDate   = LocalDate.now().minusYears(15).minusMonths(9)
 
     val daysBetween = ChronoUnit.DAYS.between(startDate, endDate)
-    val randomDays  = Random.nextLong(daysBetween + 1)
+    val randomDate  = startDate.plusDays(
+      Random.nextLong(daysBetween + 1)
+    )
 
-    val randomDate = startDate.plusDays(randomDays)
+    println(s"Random date: $randomDate")
 
-    val day   = randomDate.getDayOfMonth.toString
-    val month = randomDate.getMonthValue.toString
-    val year  = randomDate.getYear.toString
-
-    println(s"Random date: $day/$month/$year")
-
-    val dayElement = waitForVisibilityOfElement(Locators.txtDay)
+    val dayElement = waitForVisibilityOfElement(locators.day)
     dayElement.clear()
-    dayElement.sendKeys(day)
+    dayElement.sendKeys(randomDate.getDayOfMonth.toString)
 
-    val monthElement = waitForVisibilityOfElement(Locators.txtMonth)
+    val monthElement = waitForVisibilityOfElement(locators.month)
     monthElement.clear()
-    monthElement.sendKeys(month)
+    monthElement.sendKeys(randomDate.getMonthValue.toString)
 
-    val yearElement = waitForVisibilityOfElement(Locators.txtYear)
+    val yearElement = waitForVisibilityOfElement(locators.year)
     yearElement.clear()
-    yearElement.sendKeys(year)
+    yearElement.sendKeys(randomDate.getYear.toString)
   }
 
   def submitDoB(): Unit = {

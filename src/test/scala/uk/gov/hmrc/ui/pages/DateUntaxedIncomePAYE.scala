@@ -18,7 +18,7 @@ package uk.gov.hmrc.ui.pages
 
 object DateUntaxedIncomePAYE extends BasePage {
 
-  override def pageUrl: String = "self-assessment-forms/sa1/date-untaxed-income-PAYE"
+  override def pageUrl: String = "/date-untaxed-income-PAYE"
 
   override def pageTitle: String =
     "When did you start getting untaxed income which was not collected through your PAYE tax code? - Registering for Self Assessment - GOV.UK"

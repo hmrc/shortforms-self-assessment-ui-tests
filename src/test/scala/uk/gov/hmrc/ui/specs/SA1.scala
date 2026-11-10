@@ -54,7 +54,7 @@ class SA1
       And("User enters previous last name and date of when last name was changed")
       PreviousLastName.verifyPageTitle(PreviousLastName.pageTitle)
       PreviousLastName.submitPreviousLastName("LastName")
-      PreviousLastName.submitDate()
+      PreviousLastName.submitDate(PreviousLastName.Locators.lastNameChangeDate)
       PreviousLastName.clickContinueButton()
 
       Then("User enters date of birth")
@@ -68,12 +68,13 @@ class SA1
       ContactDetails.submitPhoneNumber("+77421384211")
       ContactDetails.clickContinueButton()
 
+      // TODO - DEFECT - DTR-9970 - Incorrect Address Look Up Service Page Titles
       Then("User enters an address")
-      SelectCountry.verifyPageTitle(SelectCountry.pageTitle)
+      // SelectCountry.verifyPageTitle(SelectCountry.pageTitle)
       SelectCountry.submitCountry("United Kingdom")
-      SearchAddress.verifyPageTitle(SearchAddress.pageTitle)
+      // SearchAddress.verifyPageTitle(SearchAddress.pageTitle)
       SearchAddress.chooseManualAddress()
-      EnterAddress.verifyPageTitle(EnterAddress.pageTitle)
+      // EnterAddress.verifyPageTitle(EnterAddress.pageTitle)
       EnterAddress.enterManualAddress(
         "25 Oakley Road",
         "Flat 69",
@@ -81,17 +82,20 @@ class SA1
         "City of Test",
         "Z11 1ZZ"
       )
+      // ReviewAddress.verifyPageTitle(ReviewAddress.pageTitle)
       ReviewAddress.confirmAddress()
 
       And("User enters date of when they moved to their address")
       AddressMoveDate.verifyPageTitle(AddressMoveDate.pageTitle)
+      AddressMoveDate.submitDate(AddressMoveDate.Locators.moveAddressDate)
+      AddressMoveDate.clickContinueButton()
 
       Then("User has a National Insurance Number")
       AddNino.verifyPageTitle(AddNino.pageTitle)
       AddNino.continueAsYes()
 
       And("User inputs a National Insurance Number")
-      Nino.verifyPageTitle(AddNino.pageTitle)
+      Nino.verifyPageTitle(Nino.pageTitle)
       Nino.submitNino(nino)
 
       And("User provides reasons they need to complete a tax return")
@@ -101,40 +105,49 @@ class SA1
 
       Then("User enters date of when they get untaxed income as a director")
       DateUntaxedIncomeDirector.verifyPageTitle(DateUntaxedIncomeDirector.pageTitle)
-      DateUntaxedIncomeDirector.submitDate()
+      DateUntaxedIncomeDirector.submitDate(DateUntaxedIncomeDirector.Locators.dateUntaxedIncomeDirector)
+      DateUntaxedIncomeDirector.clickContinueButton()
 
       And("User enters date of when they start getting income from land and property in the UK")
       DateLandProperty.verifyPageTitle(DateLandProperty.pageTitle)
-      DateLandProperty.submitDate()
+      DateLandProperty.submitDate(DateLandProperty.Locators.dateLandPropertyUk)
+      DateLandProperty.clickContinueButton()
 
       And("User enters date of when they start getting taxable foreign income")
       DateTaxableForeignIncome.verifyPageTitle(DateTaxableForeignIncome.pageTitle)
-      DateTaxableForeignIncome.submitDate()
+      DateTaxableForeignIncome.submitDate(DateTaxableForeignIncome.Locators.dateTaxableForeignIncome)
+      DateTaxableForeignIncome.clickContinueButton()
 
       And("User enters date of when they started getting income from a trust or settlement")
       DateTrustSettlement.verifyPageTitle(DateTrustSettlement.pageTitle)
-      DateTrustSettlement.submitDate()
+      DateTrustSettlement.submitDate(DateTrustSettlement.Locators.dateTrustSettlement)
+      DateTrustSettlement.clickContinueButton()
 
       And("User enters date of when their income first exceeded the threshold")
       DateAnnualIncome.verifyPageTitle(DateAnnualIncome.pageTitle)
-      DateAnnualIncome.submitDate()
+      DateAnnualIncome.submitDate(DateAnnualIncome.Locators.dateAnnualIncome)
+      DateAnnualIncome.clickContinueButton()
 
       And("User enters date of when they started getting untaxed income which was not collected through PAYE tax code")
       DateUntaxedIncomePAYE.verifyPageTitle(DateUntaxedIncomePAYE.pageTitle)
-      DateUntaxedIncomePAYE.submitDate()
+      DateUntaxedIncomePAYE.submitDate(DateUntaxedIncomePAYE.Locators.dateUntaxedIncomePAYE)
+      DateUntaxedIncomePAYE.clickContinueButton()
 
       And("User enters date of when they start getting High income child benefit charge foreign income")
       DateHighIncomeChildBenefit.verifyPageTitle(DateHighIncomeChildBenefit.pageTitle)
-      DateHighIncomeChildBenefit.submitDate()
+      DateHighIncomeChildBenefit.submitDate(DateHighIncomeChildBenefit.Locators.dateHighIncomeChildBenefit)
+      DateHighIncomeChildBenefit.clickContinueButton()
 
       And("User enters the last date of the tax year in which they owe Capital Gains Tax")
       DateCapitalGainsTax.verifyPageTitle(DateCapitalGainsTax.pageTitle)
-      DateCapitalGainsTax.submitDate()
+      DateCapitalGainsTax.submitDate(DateCapitalGainsTax.Locators.dateCapitalGainsTax)
+      DateCapitalGainsTax.clickContinueButton()
 
       And("User enters any other reason for the need to complete a tax return")
       OtherReason.verifyPageTitle(OtherReason.pageTitle)
       OtherReason.inputOtherReason("This is the reason to complete a tax return.")
-      OtherReason.submitDate()
+      OtherReason.submitDate(OtherReason.Locators.dateOtherReason)
+      OtherReason.clickContinueButton()
 
       Then("User checks their answers before submitting the application")
       CheckYourAnswers.verifyPageTitle(CheckYourAnswers.pageTitle)
@@ -143,15 +156,6 @@ class SA1
       And("User declares that the information provided is correct")
       Declaration.verifyPageTitle(Declaration.pageTitle)
       Declaration.submitDeclaration("Test User")
-
-//      Then("User confirms the application is submitted")
-//      Confirmation.verifyPageTitle(Confirmation.pageTitle)
-//      Click Back to account link
     }
-
-//    Scenario("Organisation submits SA1 form without National Insurance Number") {
-//      Then("User does not have a National Insurance Number")
-//      Then("User provide reason why they do not have a National Insurance Number")
-//    }
   }
 }

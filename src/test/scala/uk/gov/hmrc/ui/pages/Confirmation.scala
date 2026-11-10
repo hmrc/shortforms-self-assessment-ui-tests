@@ -18,7 +18,7 @@ package uk.gov.hmrc.ui.pages
 
 object Confirmation extends BasePage {
 
-  override def pageUrl: String = "self-assessment-forms/sa1/confirmation"
+  override def pageUrl: String = "/confirmation"
 
   override def pageTitle: String =
     "Confirmation - Registering for Self Assessment - GOV.UK"

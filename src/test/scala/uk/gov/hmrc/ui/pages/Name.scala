@@ -18,7 +18,7 @@ package uk.gov.hmrc.ui.pages
 
 object Name extends BasePage {
 
-  override def pageUrl: String = "self-assessment-forms/sa1/name"
+  override def pageUrl: String = "/name"
 
   override def pageTitle: String =
     "What is your name? - Registering for Self Assessment - GOV.UK"

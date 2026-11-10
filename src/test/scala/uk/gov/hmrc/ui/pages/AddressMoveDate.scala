@@ -16,11 +16,9 @@
 
 package uk.gov.hmrc.ui.pages
 
-import uk.gov.hmrc.ui.pages.SelectCountry.clickContinueButton
-
 object AddressMoveDate extends BasePage {
 
-  override def pageUrl: String = "self-assessment-forms/sa1/move-address"
+  override def pageUrl: String = "/move-address"
 
   override def pageTitle: String =
     "When did you move to your address? - Registering for Self Assessment - GOV.UK"

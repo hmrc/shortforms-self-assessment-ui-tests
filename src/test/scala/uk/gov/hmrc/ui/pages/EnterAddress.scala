@@ -16,11 +16,9 @@
 
 package uk.gov.hmrc.ui.pages
 
-import uk.gov.hmrc.ui.pages.SelectCountry.clickContinueButton
-
 object EnterAddress extends BasePage {
 
-  override def pageUrl: String = "self-assessment-forms/sa1/address"
+  override def pageUrl: String = "/address"
 
   override def pageTitle: String =
     "What is your address? - Registering for Self Assessment - GOV.UK"

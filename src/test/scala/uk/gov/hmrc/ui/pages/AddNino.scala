@@ -16,11 +16,9 @@
 
 package uk.gov.hmrc.ui.pages
 
-import uk.gov.hmrc.ui.pages.SelectCountry.clickContinueButton
-
 object AddNino extends BasePage {
 
-  override def pageUrl: String = "self-assessment-forms/sa1/ni-number"
+  override def pageUrl: String = "/ni-number"
 
   override def pageTitle: String =
     "National Insurance number - Registering for Self Assessment - GOV.UK"

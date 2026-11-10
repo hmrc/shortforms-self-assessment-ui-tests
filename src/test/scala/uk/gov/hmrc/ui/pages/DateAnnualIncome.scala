@@ -18,7 +18,7 @@ package uk.gov.hmrc.ui.pages
 
 object DateAnnualIncome extends BasePage {
 
-  override def pageUrl: String = "self-assessment-forms/sa1/date-annual-income"
+  override def pageUrl: String = "/date-annual-income"
 
   override def pageTitle: String =
     "Annual income - Registering for Self Assessment - GOV.UK"

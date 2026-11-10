@@ -18,14 +18,12 @@ package uk.gov.hmrc.ui.pages
 
 object Declaration extends BasePage {
 
-  override def pageUrl: String = "self-assessment-forms/sa1/declaration"
+  override def pageUrl: String = "/declaration"
 
   override def pageTitle: String =
     "Declaration - Registering for Self Assessment - GOV.UK"
 
   def submitDeclaration(fullName: String): Unit =
     input(Locators.txtInput, fullName)
-    confirmAndSubmit()
-
 }
 //

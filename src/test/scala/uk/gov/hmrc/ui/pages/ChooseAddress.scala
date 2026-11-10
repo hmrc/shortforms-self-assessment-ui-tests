@@ -18,7 +18,7 @@ package uk.gov.hmrc.ui.pages
 
 object ChooseAddress extends BasePage {
 
-  override def pageUrl: String = "self-assessment-forms/sa1/address"
+  override def pageUrl: String = "/address"
 
   override def pageTitle: String =
     "Choose your address - Registering for Self Assessment - GOV.UK"

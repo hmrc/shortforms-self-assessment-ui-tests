@@ -18,7 +18,7 @@ package uk.gov.hmrc.ui.pages
 
 object TaxableForeignIncome extends BasePage {
 
-  override def pageUrl: String = "self-assessment-forms/sa1/date-untaxed-income-director"
+  override def pageUrl: String = "/date-untaxed-income-director"
 
   override def pageTitle: String =
     "When did you get untaxed income as a director? - Registering for Self Assessment - GOV.UK"

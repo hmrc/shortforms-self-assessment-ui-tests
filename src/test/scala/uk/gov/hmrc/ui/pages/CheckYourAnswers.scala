@@ -18,7 +18,7 @@ package uk.gov.hmrc.ui.pages
 
 object CheckYourAnswers extends BasePage {
 
-  override def pageUrl: String = "self-assessment-forms/sa1/check-answers"
+  override def pageUrl: String = "/check-answers"
 
   override def pageTitle: String =
     "Check your answers - Registering for Self Assessment - GOV.UK"

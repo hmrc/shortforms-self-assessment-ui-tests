@@ -22,7 +22,7 @@ import scala.collection.JavaConverters.asScalaBufferConverter
 
 object TaxReturnReasons extends BasePage {
 
-  override def pageUrl: String = "self-assessment-forms/sa1/why-tax-return"
+  override def pageUrl: String = "/why-tax-return"
 
   override def pageTitle: String =
     "Why do you need to complete a tax return? - Registering for Self Assessment - GOV.UK"
