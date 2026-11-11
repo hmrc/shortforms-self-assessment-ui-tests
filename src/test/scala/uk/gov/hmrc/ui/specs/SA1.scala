@@ -16,11 +16,11 @@
 
 package uk.gov.hmrc.ui.specs
 
-import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEach, GivenWhenThen}
 import org.scalatest.featurespec.AnyFeatureSpec
 import org.scalatest.verbs.ShouldVerb
+import org.scalatest.{BeforeAndAfterAll, BeforeAndAfterEach, GivenWhenThen}
 import uk.gov.hmrc.selenium.webdriver.{Browser, ScreenshotOnFailure}
-import uk.gov.hmrc.ui.pages.*
+import uk.gov.hmrc.ui.pages.{CheckYourAnswers, *}
 
 class SA1
     extends AnyFeatureSpec
@@ -49,13 +49,7 @@ class SA1
 
       Then("User has a previous last name")
       AddPreviousLastName.verifyPageTitle(AddPreviousLastName.pageTitle)
-      AddPreviousLastName.continueAsYes()
-
-      And("User enters previous last name and date of when last name was changed")
-      PreviousLastName.verifyPageTitle(PreviousLastName.pageTitle)
-      PreviousLastName.submitPreviousLastName("LastName")
-      PreviousLastName.submitDate(PreviousLastName.Locators.lastNameChangeDate)
-      PreviousLastName.clickContinueButton()
+      AddPreviousLastName.continueAsNo()
 
       Then("User enters date of birth")
       DateOfBirth.verifyPageTitle(DateOfBirth.pageTitle)
@@ -92,24 +86,151 @@ class SA1
 
       Then("User has a National Insurance Number")
       AddNino.verifyPageTitle(AddNino.pageTitle)
-      AddNino.continueAsYes()
+      AddNino.continueAsNo()
 
-      And("User inputs a National Insurance Number")
-      Nino.verifyPageTitle(Nino.pageTitle)
-      Nino.submitNino(nino)
+      And("User provides reason to not having a National Insurance Number")
+      NoNino.verifyPageTitle(NoNino.pageTitle)
+      NoNino.inputOtherReason("This is the reason for User not having a NINO")
+      NoNino.clickContinueButton()
 
       And("User provides reasons they need to complete a tax return")
       TaxReturnReasons.verifyPageTitle(TaxReturnReasons.pageTitle)
       TaxReturnReasons.unselectAllCheckboxes()
-      TaxReturnReasons.unselectAllCheckboxes()
+      TaxReturnReasons.selectTaxReturnReasons("Other Reason", true)
       TaxReturnReasons.clickContinueButton()
 
-      Then("User enters date of when they get untaxed income as a director")
+      And("User enters any other reason for the need to complete a tax return")
+      OtherReason.verifyPageTitle(OtherReason.pageTitle)
+      OtherReason.inputOtherReason("This is the reason to complete a tax return.")
+      OtherReason.submitDate(OtherReason.Locators.dateOtherReason)
+      OtherReason.clickContinueButton()
+      CheckYourAnswers.verifyPageTitle(CheckYourAnswers.pageTitle)
+
+      Then("User updates their first name")
+      CheckYourAnswers.clickChangeLink("First Name")
+      Name.verifyPageTitle(Name.pageTitle)
+      Name.submitName("John Updated", "Doe")
+      CheckYourAnswers.verifyPageTitle(CheckYourAnswers.pageTitle)
+
+      And("User updates their last name")
+      CheckYourAnswers.clickChangeLink("Last Name")
+      Name.verifyPageTitle(Name.pageTitle)
+      Name.submitName("John Updated", "Doe Updated")
+      CheckYourAnswers.verifyPageTitle(CheckYourAnswers.pageTitle)
+
+      Then("User adds a previous last name")
+      CheckYourAnswers.clickChangeLink("Check Previous Last Name")
+      AddPreviousLastName.verifyPageTitle(AddPreviousLastName.pageTitle)
+      AddPreviousLastName.continueAsYes()
+      PreviousLastName.verifyPageTitle(PreviousLastName.pageTitle)
+      PreviousLastName.submitPreviousLastName("Previous Last Name")
+      PreviousLastName.submitDate(PreviousLastName.Locators.lastNameChangeDate)
+      PreviousLastName.clickContinueButton()
+      CheckYourAnswers.verifyPageTitle(CheckYourAnswers.pageTitle)
+
+      And("User updates previous last name")
+      CheckYourAnswers.clickChangeLink("Previous Last Name")
+      PreviousLastName.verifyPageTitle(PreviousLastName.pageTitle)
+      PreviousLastName.submitPreviousLastName("Previous LN Updated")
+      PreviousLastName.clickContinueButton()
+      CheckYourAnswers.verifyPageTitle(CheckYourAnswers.pageTitle)
+
+      Then("User updates previous last name changed date")
+      CheckYourAnswers.clickChangeLink("Previous Last Name Date")
+      PreviousLastName.verifyPageTitle(PreviousLastName.pageTitle)
+      PreviousLastName.submitDate(PreviousLastName.Locators.lastNameChangeDate)
+      PreviousLastName.clickContinueButton()
+      CheckYourAnswers.verifyPageTitle(CheckYourAnswers.pageTitle)
+
+      And("User updates Date of Birth")
+      CheckYourAnswers.clickChangeLink("Date of Birth")
+      DateOfBirth.verifyPageTitle(DateOfBirth.pageTitle)
+      DateOfBirth.submitDoB()
+      DateOfBirth.clickContinueButton()
+      CheckYourAnswers.verifyPageTitle(CheckYourAnswers.pageTitle)
+
+      // TODO - DEFECT - DTR-9970 - Incorrect Address Look Up Service Page Titles
+      Then("User enters an address")
+      CheckYourAnswers.clickChangeLink("Address")
+      // SelectCountry.verifyPageTitle(SelectCountry.pageTitle)
+      SelectCountry.submitCountry("United Kingdom")
+      // SearchAddress.verifyPageTitle(SearchAddress.pageTitle)
+      SearchAddress.chooseManualAddress()
+      // EnterAddress.verifyPageTitle(EnterAddress.pageTitle)
+      EnterAddress.enterManualAddress(
+        "Updated Address 1",
+        "Updated Address 2",
+        "Updated Address 3",
+        "Updated Test City",
+        "Z11 1ZZ"
+      )
+      // ReviewAddress.verifyPageTitle(ReviewAddress.pageTitle)
+      ReviewAddress.confirmAddress()
+      CheckYourAnswers.verifyPageTitle(CheckYourAnswers.pageTitle)
+
+      And("User updates date of when they moved to their address")
+      CheckYourAnswers.clickChangeLink("Address Move Date")
+      AddressMoveDate.verifyPageTitle(AddressMoveDate.pageTitle)
+      AddressMoveDate.submitDate(AddressMoveDate.Locators.moveAddressDate)
+      AddressMoveDate.clickContinueButton()
+      CheckYourAnswers.verifyPageTitle(CheckYourAnswers.pageTitle)
+
+      Then("User updates email address")
+      CheckYourAnswers.clickChangeLink("Email Address")
+      ContactDetails.verifyPageTitle(ContactDetails.pageTitle)
+      ContactDetails.submitEmailAddress("user.test@digital.hmrc.co.uk")
+      ContactDetails.clickContinueButton()
+      CheckYourAnswers.verifyPageTitle(CheckYourAnswers.pageTitle)
+
+      And("User updates phone number")
+      CheckYourAnswers.clickChangeLink("Email Address")
+      ContactDetails.verifyPageTitle(ContactDetails.pageTitle)
+      ContactDetails.submitPhoneNumber("07123123123")
+      ContactDetails.clickContinueButton()
+      CheckYourAnswers.verifyPageTitle(CheckYourAnswers.pageTitle)
+
+      Then("User updated reason for not having a National Insurance Number")
+      CheckYourAnswers.clickChangeLink("National Insurance Number Reason")
+      NoNino.verifyPageTitle(NoNino.pageTitle)
+      NoNino.inputOtherReason("This is the updated reason for not having a NINO")
+      NoNino.clickContinueButton()
+      CheckYourAnswers.verifyPageTitle(CheckYourAnswers.pageTitle)
+
+      Then("User adds a National Insurance Number")
+      CheckYourAnswers.clickChangeLink("Check National Insurance Number")
+      AddNino.verifyPageTitle(AddNino.pageTitle)
+      AddNino.continueAsYes()
+      Nino.verifyPageTitle(Nino.pageTitle)
+      Nino.submitNino(nino)
+      CheckYourAnswers.verifyPageTitle(CheckYourAnswers.pageTitle)
+
+      And("User updates their National Insurance Number")
+      CheckYourAnswers.clickChangeLink("National Insurance Number")
+      Nino.verifyPageTitle(Nino.pageTitle)
+      Nino.submitNino("NM772208 B")
+      CheckYourAnswers.verifyPageTitle(CheckYourAnswers.pageTitle)
+
+      Then("User user updates other reason date")
+      CheckYourAnswers.verifyPageTitle(CheckYourAnswers.pageTitle)
+      CheckYourAnswers.clickChangeLink("Other Reason Date")
+      OtherReason.verifyPageTitle(OtherReason.pageTitle)
+      OtherReason.submitDate(OtherReason.Locators.dateOtherReason)
+      OtherReason.clickContinueButton()
+      CheckYourAnswers.verifyPageTitle(CheckYourAnswers.pageTitle)
+
+      And("User selects all reasons to complete a tax return")
+      CheckYourAnswers.clickChangeLink("Other Reason")
+      TaxReturnReasons.verifyPageTitle(TaxReturnReasons.pageTitle)
+      TaxReturnReasons.unselectAllCheckboxes()
+      TaxReturnReasons.selectAllCheckboxes()
+      TaxReturnReasons.clickContinueButton()
+
+      And("User enters date of when they get untaxed income as a director")
       DateUntaxedIncomeDirector.verifyPageTitle(DateUntaxedIncomeDirector.pageTitle)
       DateUntaxedIncomeDirector.submitDate(DateUntaxedIncomeDirector.Locators.dateUntaxedIncomeDirector)
       DateUntaxedIncomeDirector.clickContinueButton()
 
-      And("User enters date of when they start getting income from land and property in the UK")
+      Then("User enters date of when they start getting income from land and property in the UK")
       DateLandProperty.verifyPageTitle(DateLandProperty.pageTitle)
       DateLandProperty.submitDate(DateLandProperty.Locators.dateLandPropertyUk)
       DateLandProperty.clickContinueButton()
@@ -119,7 +240,7 @@ class SA1
       DateTaxableForeignIncome.submitDate(DateTaxableForeignIncome.Locators.dateTaxableForeignIncome)
       DateTaxableForeignIncome.clickContinueButton()
 
-      And("User enters date of when they started getting income from a trust or settlement")
+      Then("User enters date of when they started getting income from a trust or settlement")
       DateTrustSettlement.verifyPageTitle(DateTrustSettlement.pageTitle)
       DateTrustSettlement.submitDate(DateTrustSettlement.Locators.dateTrustSettlement)
       DateTrustSettlement.clickContinueButton()
@@ -129,7 +250,7 @@ class SA1
       DateAnnualIncome.submitDate(DateAnnualIncome.Locators.dateAnnualIncome)
       DateAnnualIncome.clickContinueButton()
 
-      And("User enters date of when they started getting untaxed income which was not collected through PAYE tax code")
+      Then("User enters date of when they started getting untaxed income which was not collected through PAYE tax code")
       DateUntaxedIncomePAYE.verifyPageTitle(DateUntaxedIncomePAYE.pageTitle)
       DateUntaxedIncomePAYE.submitDate(DateUntaxedIncomePAYE.Locators.dateUntaxedIncomePAYE)
       DateUntaxedIncomePAYE.clickContinueButton()
@@ -139,18 +260,70 @@ class SA1
       DateHighIncomeChildBenefit.submitDate(DateHighIncomeChildBenefit.Locators.dateHighIncomeChildBenefit)
       DateHighIncomeChildBenefit.clickContinueButton()
 
-      And("User enters the last date of the tax year in which they owe Capital Gains Tax")
+      Then("User enters the last date of the tax year in which they owe Capital Gains Tax")
       DateCapitalGainsTax.verifyPageTitle(DateCapitalGainsTax.pageTitle)
       DateCapitalGainsTax.submitDate(DateCapitalGainsTax.Locators.dateCapitalGainsTax)
       DateCapitalGainsTax.clickContinueButton()
 
-      And("User enters any other reason for the need to complete a tax return")
-      OtherReason.verifyPageTitle(OtherReason.pageTitle)
-      OtherReason.inputOtherReason("This is the reason to complete a tax return.")
-      OtherReason.submitDate(OtherReason.Locators.dateOtherReason)
-      OtherReason.clickContinueButton()
+      And("User checks their answers before submitting the application")
+      CheckYourAnswers.verifyPageTitle(CheckYourAnswers.pageTitle)
 
-      Then("User checks their answers before submitting the application")
+      Then("User updates date of when they get untaxed income as a director")
+      CheckYourAnswers.clickChangeLink("Company Director Untaxed Earnings Date")
+      DateUntaxedIncomeDirector.verifyPageTitle(DateUntaxedIncomeDirector.pageTitle)
+      DateUntaxedIncomeDirector.submitDate(DateUntaxedIncomeDirector.Locators.dateUntaxedIncomeDirector)
+      DateUntaxedIncomeDirector.clickContinueButton()
+      CheckYourAnswers.verifyPageTitle(CheckYourAnswers.pageTitle)
+
+      And("User updates date of when they start getting income from land and property in the UK")
+      CheckYourAnswers.clickChangeLink("Land and Property Income Date")
+      DateLandProperty.verifyPageTitle(DateLandProperty.pageTitle)
+      DateLandProperty.submitDate(DateLandProperty.Locators.dateLandPropertyUk)
+      DateLandProperty.clickContinueButton()
+      CheckYourAnswers.verifyPageTitle(CheckYourAnswers.pageTitle)
+
+      Then("User updates date of when they start getting taxable foreign income")
+      CheckYourAnswers.clickChangeLink("Taxable Foreign Income or Dividends Date")
+      DateTaxableForeignIncome.verifyPageTitle(DateTaxableForeignIncome.pageTitle)
+      DateTaxableForeignIncome.submitDate(DateTaxableForeignIncome.Locators.dateTaxableForeignIncome)
+      DateTaxableForeignIncome.clickContinueButton()
+      CheckYourAnswers.verifyPageTitle(CheckYourAnswers.pageTitle)
+
+      And("User updates date of when they started getting income from a trust or settlement")
+      CheckYourAnswers.clickChangeLink("Trust or Settlement Income Date")
+      DateTrustSettlement.verifyPageTitle(DateTrustSettlement.pageTitle)
+      DateTrustSettlement.submitDate(DateTrustSettlement.Locators.dateTrustSettlement)
+      DateTrustSettlement.clickContinueButton()
+      CheckYourAnswers.verifyPageTitle(CheckYourAnswers.pageTitle)
+
+      Then("User updates date of when their income first exceeded the threshold")
+      CheckYourAnswers.clickChangeLink("Annual Income Exceeds Threshold Date")
+      DateAnnualIncome.verifyPageTitle(DateAnnualIncome.pageTitle)
+      DateAnnualIncome.submitDate(DateAnnualIncome.Locators.dateAnnualIncome)
+      DateAnnualIncome.clickContinueButton()
+      CheckYourAnswers.verifyPageTitle(CheckYourAnswers.pageTitle)
+
+      And("User updates date of when they started getting untaxed income which was not collected through PAYE tax code")
+      CheckYourAnswers.clickChangeLink("Untaxed Income not collected via PAYE Date")
+      DateUntaxedIncomePAYE.verifyPageTitle(DateUntaxedIncomePAYE.pageTitle)
+      DateUntaxedIncomePAYE.submitDate(DateUntaxedIncomePAYE.Locators.dateUntaxedIncomePAYE)
+      DateUntaxedIncomePAYE.clickContinueButton()
+      CheckYourAnswers.verifyPageTitle(CheckYourAnswers.pageTitle)
+
+      Then("User updates date of when they start getting High income child benefit charge foreign income")
+      CheckYourAnswers.clickChangeLink("High Income Child Benefit Charge Date")
+      DateHighIncomeChildBenefit.verifyPageTitle(DateHighIncomeChildBenefit.pageTitle)
+      DateHighIncomeChildBenefit.submitDate(DateHighIncomeChildBenefit.Locators.dateHighIncomeChildBenefit)
+      DateHighIncomeChildBenefit.clickContinueButton()
+      CheckYourAnswers.verifyPageTitle(CheckYourAnswers.pageTitle)
+
+      And("User updates the last date of the tax year in which they owe Capital Gains Tax")
+      CheckYourAnswers.clickChangeLink("Capital Gains Tax Date")
+      DateCapitalGainsTax.verifyPageTitle(DateCapitalGainsTax.pageTitle)
+      DateCapitalGainsTax.submitDate(DateCapitalGainsTax.Locators.dateCapitalGainsTax)
+      DateCapitalGainsTax.clickContinueButton()
+
+      Then("User updates their answers before submitting the application")
       CheckYourAnswers.verifyPageTitle(CheckYourAnswers.pageTitle)
       CheckYourAnswers.clickContinueButton()
 
