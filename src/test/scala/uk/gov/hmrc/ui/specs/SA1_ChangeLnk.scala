@@ -307,9 +307,9 @@ class SA1_ChangeLnk
       CheckYourAnswers.verifyPageTitle(CheckYourAnswers.pageTitle)
       CheckYourAnswers.clickContinueButton()
 
-//    And("User declares that the information provided is correct")
-//    Declaration.verifyPageTitle(Declaration.pageTitle)
-//    Declaration.submitDeclaration("Test User")
+      And("User declares that the information provided is correct")
+      Declaration.verifyPageTitle(Declaration.pageTitle)
+      Declaration.submitDeclaration("Test User")
     }
   }
 }
