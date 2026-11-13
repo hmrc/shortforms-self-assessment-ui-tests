@@ -18,7 +18,7 @@ package uk.gov.hmrc.ui.pages
 
 import org.openqa.selenium.By
 import uk.gov.hmrc.ui.pages.AuthWizard.{click, sendKeys}
-import uk.gov.hmrc.ui.util.Env
+import uk.gov.hmrc.ui.util.{Env, Urls}
 
 object AuthWizard extends BasePage {
 
@@ -49,9 +49,9 @@ object AuthWizard extends BasePage {
     val Redirect =
       if (
         Env.baseUrl.equals(
-          "http://localhost:10081/auth-login-stub/gg-sign-in?continue=http://localhost:10081/self-assessment-forms/sa1/start"
+          "http://localhost:9949/auth-login-stub/gg-sign-in?continue=http://localhost:10081/self-assessment-forms/sa1/start"
         )
-      ) "localhost:10081/self-assessment-forms/sa1/start"
+      ) "http://localhost:10081/self-assessment-forms/sa1/start"
       else s"/self-assessment-forms/sa1"
     Redirect
   }
