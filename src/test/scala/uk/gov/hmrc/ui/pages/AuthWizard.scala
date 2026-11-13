@@ -52,7 +52,7 @@ object AuthWizard extends BasePage {
           "http://localhost:10081/auth-login-stub/gg-sign-in?continue=http://localhost:10081/self-assessment-forms/sa1/start"
         )
       ) "localhost:10081/self-assessment-forms/sa1/start"
-      else s"http://localhost:10081/self-assessment-forms/sa1/"
+      else s"/self-assessment-forms/sa1"
     Redirect
   }
 
