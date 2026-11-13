@@ -333,10 +333,10 @@ class SA1
       And("User declares that the information provided is correct")
       Declaration.verifyPageTitle(Declaration.pageTitle)
       Declaration.submitDeclaration("Test User")
-//      Declaration.confirmAndSubmit()
-//
-//      Then("User checks their answers")
-//      Confirmation.verifyPageTitle(Confirmation.pageTitle)
+      Declaration.confirmSubmit()
+
+      Then("User checks their answers")
+      Confirmation.verifyPageTitle(Confirmation.pageTitle)
     }
   }
 }
