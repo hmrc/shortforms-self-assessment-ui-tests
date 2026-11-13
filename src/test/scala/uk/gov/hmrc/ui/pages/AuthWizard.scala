@@ -18,7 +18,7 @@ package uk.gov.hmrc.ui.pages
 
 import org.openqa.selenium.By
 import uk.gov.hmrc.ui.pages.AuthWizard.{click, sendKeys}
-import uk.gov.hmrc.ui.util.Env
+import uk.gov.hmrc.ui.util.{Env, Urls}
 
 object AuthWizard extends BasePage {
 
@@ -26,8 +26,9 @@ object AuthWizard extends BasePage {
 
   override def pageTitle: String = "auth login stub"
 
-  val url: String  = s"${Env.baseUrl}"
-  val localurlstub = "http://localhost:10081/self-assessment-forms/sa1/"
+  val url: String = s"${Env.baseUrl}"
+  //  val url: String  = s"${Env.baseUrl}"
+//  val localurlstub = "http://localhost:10081/self-assessment-forms/sa1/"
 
   val redirectUrl: By     = By.id("redirectionUrl")
   val affinityGroup: By   = By.id("affinityGroupSelect")
@@ -45,16 +46,23 @@ object AuthWizard extends BasePage {
   val btnSubmit: By       = By.id("submit")
   val btnAddEnrolment: By = By.id("add-ident-btn-0")
 
-  def buildRedirectUrl(): String = {
-    val Redirect =
-      if (
-        Env.baseUrl.equals(
-          "http://localhost:10081/auth-login-stub/gg-sign-in?continue=http://localhost:10081/self-assessment-forms/sa1/start"
-        )
-      ) "localhost:10081/self-assessment-forms/sa1/start"
-      else s"/self-assessment-forms/sa1"
-    Redirect
-  }
+//  def buildRedirectUrl(): String = {
+//    val Redirect =
+//      if (
+//        Env.baseUrl.equals(
+//          "http://localhost:10081/auth-login-stub/gg-sign-in?continue=http://localhost:10081/self-assessment-forms/sa1/start"
+//        )
+//      ) "localhost:10081/self-assessment-forms/sa1/start"
+//      else s"/self-assessment-forms/sa1"
+//    Redirect
+//  }
+
+  def buildRedirectUrl(): String =
+    Env.baseUrl match {
+      case Urls.LOCAL =>
+        "http://localhost:10081/self-assessment-forms/sa1/start"
+      case _          => "/self-assessment-forms/sa1"
+    }
 
   def fillInputs(ninoVal: String, confidenceVal: String, affinityGroupVal: String): this.type = {
     driver.findElement(nino).sendKeys(ninoVal)
