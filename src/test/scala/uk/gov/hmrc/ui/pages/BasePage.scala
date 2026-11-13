@@ -26,6 +26,9 @@ import uk.gov.hmrc.selenium.webdriver.Driver
 import uk.gov.hmrc.ui.driver.BrowserDriver
 
 import java.time.Duration
+import scala.util.Random
+import java.time.LocalDate
+import java.time.temporal.ChronoUnit
 
 trait BasePage extends PageObject with Eventually with Matchers with LazyLogging with BrowserDriver {
 
@@ -38,32 +41,115 @@ trait BasePage extends PageObject with Eventually with Matchers with LazyLogging
 
   /** Locator values */
   object Locators {
-    val btnContinue           = "//*[contains(@class,'govuk-button') and normalize-space()='Continue']"
-    val btnSaveAndContinue    = "//*[contains(@class,'govuk-button') and normalize-space()='Save and continue']"
-    val btnConfirmAndContinue = "//*[contains(@class,'govuk-button') and normalize-space()='Confirm and continue']"
-    val btnConfirmAndSubmit   = "//*[contains(@class,'govuk-button') and normalize-space()='Confirm and submit']"
-    val btnAddPurchaser       = "//*[contains(@class,'govuk-button') and normalize-space()='Add a purchaser']"
-    val btnConfirmAddress     = "continue"
-    val lnkBack               = "Back"
-    val btnSubmit             = ".govuk-button"
-    val lnkHeader             = ".govuk-header__link.govuk-header__service-name"
-    val rdoYes                = "#value_0"
-    val rdoNo                 = "#value_1"
-    val txtFileName           = ".govuk-body"
-    val paragraphText         = By.ByClassName("govuk-body")
-    val txtBannerTitle        = "#govuk-notification-banner-title"
-    val lnkRemoveFile         = "dd[class='govuk-summary-list__actions'] a[class='govuk-link']"
-    val txtMonth: By          = By.ById("value.month")
-    val txtYear: By           = By.ById("value.year")
-    val txtPostCode: By       = By.ById("postcode")
-    val txtAddress1: By       = By.ById("line1")
-    val txtTown: By           = By.ById("town")
-    val txtAddressPostCode    = By.ById("postcode")
-    val lnkAddrManually       = "Enter the address manually"
-    val cbxConfirm            = "#value_0"
+    val btnContinue             = "//*[contains(@class,'govuk-button') and normalize-space()='Continue']"
+    val btnSaveAndContinue      = "//*[contains(@class,'govuk-button') and normalize-space()='Save and continue']"
+    val btnConfirmAndContinue   = "//*[contains(@class,'govuk-button') and normalize-space()='Confirm and continue']"
+    val btnConfirmAndSubmit     = "//*[contains(@class,'govuk-button') and normalize-space()='Confirm and submit']"
+    val btnAddPurchaser         = "//*[contains(@class,'govuk-button') and normalize-space()='Add a purchaser']"
+    val btnConfirmAddress       = "continue"
+    val lnkBack                 = "Back"
+    val btnSubmit               = ".govuk-button"
+    val lnkHeader               = ".govuk-header__link.govuk-header__service-name"
+    val rdoYes                  = "#value"
+    val rdoNo                   = "#value-2"
+    val txtFileName             = ".govuk-body"
+    val paragraphText           = By.ByClassName("govuk-body")
+    val txtBannerTitle          = "#govuk-notification-banner-title"
+    val lnkRemoveFile           = "dd[class='govuk-summary-list__actions'] a[class='govuk-link']"
+    val txtPostCode: By         = By.ById("postcode")
+    val txtAddress1: By         = By.ById("line1")
+    val txtTown: By             = By.ById("town")
+    val txtAddressPostCode      = By.ById("postcode")
+    val lnkAddrManually         = "Enter the address manually"
+    val cbxConfirm              = "#value_0"
+    val txtFirstName: By        = By.ById("firstName")
+    val txtLastName: By         = By.ById("lastName")
+    val txtPreviousLastName: By = By.ById("previousLastName")
+    val txtDoBDay: By           = By.id("dateOfBirth.day")
+    val txtDoBMonth: By         = By.id("dateOfBirth.month")
+    val txtDoBYear: By          = By.id("dateOfBirth.year")
+    val txtEmailAddress: By     = By.ById("emailAddress")
+    val txtPhoneNumber: By      = By.ById("phoneNumber")
+    val txtCountry: By          = By.ById("countryCode")
+    val txtPostalcode: By       = By.ById("postcode")
+    val lnkmanualAddress        = "manualAddress"
+    val txtAddressLine1: By     = By.ById("line1")
+    val txtAddressLine2: By     = By.ById("line2")
+    val txtAddressLine3: By     = By.ById("line3")
+    val countryDropdown         = "#countryCode__listbox"
+    val txtInput: By            = By.ById("value")
+    val txtOtherReason: By      = By.ById("reason")
+    val address1                = "#addressId"
+
+    val lastNameChangeDate = DateLocators(
+      By.id("lastNameChangeDate.day"),
+      By.id("lastNameChangeDate.month"),
+      By.id("lastNameChangeDate.year")
+    )
+
+    val moveAddressDate = DateLocators(
+      By.id("moveAddressDate.day"),
+      By.id("moveAddressDate.month"),
+      By.id("moveAddressDate.year")
+    )
+
+    val dateUntaxedIncomeDirector = DateLocators(
+      By.id("dateUntaxedIncomeDirector.day"),
+      By.id("dateUntaxedIncomeDirector.month"),
+      By.id("dateUntaxedIncomeDirector.year")
+    )
+
+    val dateLandPropertyUk = DateLocators(
+      By.id("dateLandPropertyUk.day"),
+      By.id("dateLandPropertyUk.month"),
+      By.id("dateLandPropertyUk.year")
+    )
+
+    val dateTaxableForeignIncome = DateLocators(
+      By.id("value.day"),
+      By.id("value.month"),
+      By.id("value.year")
+    )
+
+    val dateTrustSettlement = DateLocators(
+      By.id("trustSettlementDate.day"),
+      By.id("trustSettlementDate.month"),
+      By.id("trustSettlementDate.year")
+    )
+
+    val dateAnnualIncome = DateLocators(
+      By.id("value.day"),
+      By.id("value.month"),
+      By.id("value.year")
+    )
+
+    val dateUntaxedIncomePAYE = DateLocators(
+      By.id("value.day"),
+      By.id("value.month"),
+      By.id("value.year")
+    )
+
+    val dateHighIncomeChildBenefit = DateLocators(
+      By.id("value.day"),
+      By.id("value.month"),
+      By.id("value.year")
+    )
+
+    val dateCapitalGainsTax = DateLocators(
+      By.id("value.day"),
+      By.id("value.month"),
+      By.id("value.year")
+    )
+
+    val dateOtherReason = DateLocators(
+      By.id("reasonDate.day"),
+      By.id("reasonDate.month"),
+      By.id("reasonDate.year")
+    )
   }
 
   def pageUrl: String
+
   def pageTitle: String
 
   /** Wait for visibility of an element */
@@ -130,6 +216,8 @@ trait BasePage extends PageObject with Eventually with Matchers with LazyLogging
 
   def removeFile(): Unit = click(By.cssSelector(Locators.lnkRemoveFile))
 
+  def clickCountryDropdown(): Unit = click(By.cssSelector(Locators.countryDropdown))
+
   /** Navigation methods */
   def navigateToPage(url: String): Unit = driver.navigate().to(url)
 
@@ -192,4 +280,65 @@ trait BasePage extends PageObject with Eventually with Matchers with LazyLogging
   def waitForPageTitle(expectedTitle: String): Unit =
     fluentWait.until(ExpectedConditions.titleContains(expectedTitle))
 
+  case class DateLocators(
+    day: By,
+    month: By,
+    year: By
+  )
+
+  def submitDate(locators: DateLocators): Unit = {
+
+    val startDate = LocalDate.of(1906, 1, 3)
+    val endDate   = LocalDate.now().minusYears(15).minusMonths(9)
+
+    val daysBetween = ChronoUnit.DAYS.between(startDate, endDate)
+    val randomDate  = startDate.plusDays(
+      Random.nextLong(daysBetween + 1)
+    )
+
+    println(s"Random date: $randomDate")
+
+    val dayElement = waitForVisibilityOfElement(locators.day)
+    dayElement.clear()
+    dayElement.sendKeys(randomDate.getDayOfMonth.toString)
+
+    val monthElement = waitForVisibilityOfElement(locators.month)
+    monthElement.clear()
+    monthElement.sendKeys(randomDate.getMonthValue.toString)
+
+    val yearElement = waitForVisibilityOfElement(locators.year)
+    yearElement.clear()
+    yearElement.sendKeys(randomDate.getYear.toString)
+  }
+
+  def submitDoB(): Unit = {
+
+    val startDate = LocalDate.of(1906, 1, 1)
+    val endDate   = LocalDate.now().minusYears(15).minusMonths(9)
+
+    val daysBetween = ChronoUnit.DAYS.between(startDate, endDate)
+    val randomDays  = Random.nextLong(daysBetween + 1)
+
+    val randomDate = startDate.plusDays(randomDays)
+
+    val day   = randomDate.getDayOfMonth.toString
+    val month = randomDate.getMonthValue.toString
+    val year  = randomDate.getYear.toString
+
+    println(s"Random date: $day/$month/$year")
+
+    val dayElement = waitForVisibilityOfElement(Locators.txtDoBDay)
+    dayElement.clear()
+    dayElement.sendKeys(day)
+
+    val monthElement = waitForVisibilityOfElement(Locators.txtDoBMonth)
+    monthElement.clear()
+    monthElement.sendKeys(month)
+
+    val yearElement = waitForVisibilityOfElement(Locators.txtDoBYear)
+    yearElement.clear()
+    yearElement.sendKeys(year)
+
+  }
 }
+//
