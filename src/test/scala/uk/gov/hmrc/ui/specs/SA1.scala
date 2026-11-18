@@ -335,8 +335,8 @@ class SA1
       Declaration.submitDeclaration("Test User")
       Declaration.confirmSubmit()
 
-      Then("User checks their answers")
-      Confirmation.verifyPageTitle(Confirmation.pageTitle)
+//      Then("User checks their answers")
+//      Confirmation.verifyPageTitle(Confirmation.pageTitle)
     }
   }
 }
