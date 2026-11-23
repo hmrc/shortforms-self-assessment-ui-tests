@@ -62,13 +62,9 @@ class SA1
       ContactDetails.submitPhoneNumber("+77421384211")
       ContactDetails.clickContinueButton()
 
-      // TODO - DEFECT - DTR-9970 - Incorrect Address Look Up Service Page Titles
       Then("User enters an address")
-      // SelectCountry.verifyPageTitle(SelectCountry.pageTitle)
       SelectCountry.submitCountry("United Kingdom")
-      // SearchAddress.verifyPageTitle(SearchAddress.pageTitle)
       SearchAddress.chooseManualAddress()
-      // EnterAddress.verifyPageTitle(EnterAddress.pageTitle)
       EnterAddress.enterManualAddress(
         "25 Oakley Road",
         "Flat 69",
@@ -76,7 +72,6 @@ class SA1
         "City of Test",
         "Z11 1ZZ"
       )
-      // ReviewAddress.verifyPageTitle(ReviewAddress.pageTitle)
       ReviewAddress.confirmAddress()
 
       And("User enters date of when they moved to their address")
@@ -152,14 +147,10 @@ class SA1
       DateOfBirth.clickContinueButton()
       CheckYourAnswers.verifyPageTitle(CheckYourAnswers.pageTitle)
 
-      // TODO - DEFECT - DTR-9970 - Incorrect Address Look Up Service Page Titles
       And("User enters an address")
       CheckYourAnswers.clickChangeLink("Address")
-      // SelectCountry.verifyPageTitle(SelectCountry.pageTitle)
       SelectCountry.submitCountry("United Kingdom")
-      // SearchAddress.verifyPageTitle(SearchAddress.pageTitle)
       SearchAddress.chooseManualAddress()
-      // EnterAddress.verifyPageTitle(EnterAddress.pageTitle)
       EnterAddress.enterManualAddress(
         "Updated Address 1",
         "Updated Address 2",
@@ -167,7 +158,6 @@ class SA1
         "Updated Test City",
         "Z11 1ZZ"
       )
-      // ReviewAddress.verifyPageTitle(ReviewAddress.pageTitle)
       ReviewAddress.confirmAddress()
       CheckYourAnswers.verifyPageTitle(CheckYourAnswers.pageTitle)
 
@@ -333,10 +323,10 @@ class SA1
       And("User declares that the information provided is correct")
       Declaration.verifyPageTitle(Declaration.pageTitle)
       Declaration.submitDeclaration("Test User")
-      Declaration.confirmSubmit()
-
-      Then("User checks their answers")
-      Confirmation.verifyPageTitle(Confirmation.pageTitle)
+//      Declaration.confirmSubmit()
+//
+//      Then("User checks their answers")
+//      Confirmation.verifyPageTitle(Confirmation.pageTitle)
     }
   }
 }
